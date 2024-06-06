@@ -26,6 +26,7 @@
         ./ccache.nix
         # ./cursor.nix
       ];
+      gaming.imports = [ ./hoyo.nix ];
       graphical.imports = [
         ./autorandr.nix
         ./bluetooth.nix
@@ -40,10 +41,9 @@
       ];
       networking.imports = [
         ./tailscale.nix
+        ./wireguard.nix
       ];
-      wayland.imports = [
-        ./wayland.nix
-      ];
+      wayland.imports = [ ./wayland.nix ];
       testing.imports = [
         # ./edgedb.nix
       ];

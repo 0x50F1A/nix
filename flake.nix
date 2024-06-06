@@ -2,6 +2,11 @@
   description = "Affine Typed NixOS";
 
   inputs = {
+    aagl = {
+      url = "github:ezKEa/aagl-gtk-on-nix";
+      inputs.nixpkgs.follows = "nixpkgs"; # Name of nixpkgs input you want to use
+    };
+
     # attic = {
     #   url = "https://flakehub.com/f/zhaofengli/attic/*.tar.gz";
     #   inputs.nixpkgs.follows = "nixpkgs";
@@ -140,6 +145,8 @@
     #   inputs.nixpkgs.follows = "nixpkgs";
     # };
 
+    nur.url = "github:nix-community/NUR";
+
     pre-commit-hooks-nix = {
       url = "github:cachix/pre-commit-hooks.nix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -180,45 +187,44 @@
 
   nixConfig = {
     commit-lockfile-summary = "build(inputs): ⬆️ bump flake.lock";
-    extra-substituters = ["https://sofia.cachix.org"];
-    extra-trusted-public-keys = ["sofia.cachix.org-1:xqwE0S1tPcsqfoayNUC0YdsDpj47LQ3Q+YTdDI1WwtE="];
+    extra-substituters = [ "https://sofia.cachix.org" ];
+    extra-trusted-public-keys = [ "sofia.cachix.org-1:xqwE0S1tPcsqfoayNUC0YdsDpj47LQ3Q+YTdDI1WwtE=" ];
   };
 
-  outputs = inputs:
-    inputs.flake-parts.lib.mkFlake {inherit inputs;} {
+  outputs =
+    inputs:
+    inputs.flake-parts.lib.mkFlake { inherit inputs; } {
       systems = import inputs.systems;
       imports = [
-        inputs.just-flake.flakeModule
-        inputs.nixos-flake.flakeModule
-        inputs.pre-commit-hooks-nix.flakeModule
-        inputs.treefmt-nix.flakeModule
         ./home
         ./nixos
-        ./parts
+        (import ./parts { inherit inputs; })
+        ./templates
         ./users
       ];
 
       flake = {
-        nixosConfigurations.desktop =
-          inputs.self.nixos-flake.lib.mkLinuxSystem
-          ./systems/desktop;
+        nixosConfigurations.desktop = inputs.self.nixos-flake.lib.mkLinuxSystem ./systems/desktop;
 
         schemas = inputs.flake-schemas.schemas;
       };
 
-      perSystem = {
-        config,
-        self,
-        system,
-        ...
-      }: {
-        legacyPackages.homeConfigurations.desktop =
-          inputs.self.nixos-flake.lib.mkHomeConfiguration
-          (import inputs.nixpkgs {
-            inherit system;
-            config.allowUnfree = true;
-          })
-          ./environments/desktop;
-      };
+      perSystem =
+        {
+          config,
+          self,
+          system,
+          ...
+        }:
+        {
+          legacyPackages.homeConfigurations.desktop = inputs.self.nixos-flake.lib.mkHomeConfiguration (import
+            inputs.nixpkgs
+            {
+              inherit system;
+              config.allowUnfree = true;
+              overlays = [ inputs.nur.overlay ];
+            }
+          ) ./environments/desktop;
+        };
     };
 }

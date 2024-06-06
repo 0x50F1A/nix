@@ -1,13 +1,13 @@
 {
   pre-commit = {
-    check.enable = false;
+    check.enable = true;
     settings = {
       hooks = {
         convco = {
-          enable = false;
+          enable = true;
         };
         treefmt = {
-          enable = false;
+          enable = true;
         };
       };
     };

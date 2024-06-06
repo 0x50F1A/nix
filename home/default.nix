@@ -1,8 +1,5 @@
+{ self, inputs, ... }:
 {
-  self,
-  inputs,
-  ...
-}: {
   flake = {
     homeModules = {
       base = {
@@ -118,6 +115,7 @@
           ./go.nix
           ./java.nix
           ./jq.nix
+          ./julia.nix
           ./k9s.nix
           ./kakoune.nix
           ./mercurial.nix

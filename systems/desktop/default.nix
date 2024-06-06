@@ -1,12 +1,15 @@
-{flake, ...}: let
+{ flake, ... }:
+let
   inherit (flake) inputs;
   inherit (inputs) self;
-in {
+in
+{
   imports = [
     self.nixosModules.default
     self.nixosModules.base
     self.nixosModules.commandline
     self.nixosModules.development
+    self.nixosModules.gaming
     self.nixosModules.graphical
     self.nixosModules.networking
     self.nixosModules.wayland

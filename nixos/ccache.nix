@@ -1,6 +1,6 @@
 _: {
   programs.ccache = {
-    enable = true;
+    # enable = true;
 
     # packageNames = ["ffmpeg"];
   };
