@@ -12,9 +12,9 @@ in
     self.nixosModules.gaming
     self.nixosModules.graphical
     self.nixosModules.networking
+    self.nixosModules.nvidia
     self.nixosModules.wayland
     self.nixosModules.testing
-    "${self}/nixos/nvidia.nix"
     ./hardware-configuration.nix
   ];
 }

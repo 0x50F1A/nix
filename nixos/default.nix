@@ -2,51 +2,56 @@
   flake = {
     nixosModules = {
       default.imports = [
-        ./boot.nix
-        ./nix.nix
-        ./user.nix
+        ./boot
+        ./nix
+        ./user
       ];
       base.imports = [
-        ./environment.nix
-        ./locale.nix
-        ./networking.nix
-        ./nix-ld.nix
-        ./security.nix
-        ./services.nix
-        ./smart.nix
-        ./system.nix
-        ./virtualization.nix
+        ./environment
+        ./fhs-compat
+        ./locale
+        ./networking
+        ./nix-ld
+        ./security
+        ./services
+        ./smart
+        ./system
+        ./virtualisation
       ];
       commandline.imports = [
-        ./atop.nix
-        ./darling.nix
-        ./mtr.nix
+        ./atop
+        ./darling
+        ./mtr
       ];
       development.imports = [
-        ./ccache.nix
-        # ./cursor.nix
+        ./ccache
+        # ./cursor
       ];
-      gaming.imports = [ ./hoyo.nix ];
+      gaming.imports = [ ./hoyo ];
       graphical.imports = [
-        ./autorandr.nix
-        ./bluetooth.nix
-        ./flatpak.nix
-        ./fonts.nix
-        ./plasma.nix
-        ./printing.nix
-        ./sound.nix
-        ./steam.nix
-        ./touchpad.nix
-        ./xserver.nix
+        ./autorandr
+        ./bluetooth
+        ./flatpak
+        ./fonts
+        ./plasma
+        ./printing
+        ./sound
+        ./steam
+        ./touchpad
+        ./xserver
       ];
       networking.imports = [
-        ./tailscale.nix
-        ./wireguard.nix
+        ./tailscale
+        ./wireguard
       ];
-      wayland.imports = [ ./wayland.nix ];
-      testing.imports = [
-        # ./edgedb.nix
-      ];
+      nvidia.imports = [ ./nvidia ];
+      wayland.imports = [ ./wayland ];
+      testing = {
+        imports = [
+          # ./edgedb
+          ./lix
+        ];
+      };
     };
   };
 }

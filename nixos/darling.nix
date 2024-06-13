@@ -1,5 +1,0 @@
-{
-  programs.darling = {
-    enable = false;
-  };
-}

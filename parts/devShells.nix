@@ -1,8 +1,5 @@
+{ pkgs, config, ... }:
 {
-  pkgs,
-  config,
-  ...
-}: {
   devShells = {
     default = pkgs.mkShell {
       name = "nixos";
@@ -13,8 +10,7 @@
         config.treefmt.build.devShell
       ];
       packages = builtins.attrValues {
-        inherit
-          (pkgs)
+        inherit (pkgs)
           colmena
           convco
           just

@@ -33,6 +33,7 @@
 
     flake-parts = {
       url = "github:hercules-ci/flake-parts";
+      inputs.nixpkgs-lib.follows = "nixpkgs";
     };
 
     # flake-programs-sqlite = {
@@ -72,6 +73,18 @@
 
     # lanzaboote = {
     #   url = "https://flakehub.com/f/nix-community/lanzaboote/0.3.0.tar.gz";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
+
+    # Lix is now in nixpkgs, so is there much reason to use these?
+    # lix = {
+    #   url = "git+https://git.lix.systems/lix-project/lix?ref=refs/tags/2.90-beta.1";
+    #   flake = false;
+    # };
+
+    # lix-module = {
+    #   url = "git+https://git.lix.systems/lix-project/nixos-module";
+    #   inputs.lix.follows = "lix";
     #   inputs.nixpkgs.follows = "nixpkgs";
     # };
 

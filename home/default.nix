@@ -1,144 +1,143 @@
-{ self, inputs, ... }:
 {
   flake = {
     homeModules = {
       base = {
         imports = [
-          ./misc/base.nix
-          ./git.nix
-          ./home-manager.nix
-          ./nix-index.nix
-          ./xdg.nix
-          ./zsh.nix
+          ./misc/base
+          ./git
+          ./home-manager
+          ./nix-index
+          ./xdg
+          ./zsh
         ];
       };
       commandline = {
         imports = [
-          ./misc/commandline.nix
-          ./atuin.nix
-          ./autojump.nix
-          ./bat.nix
-          ./broot.nix
-          ./carapace.nix
-          ./comodoro.nix
-          ./dircolors.nix
-          ./direnv.nix
-          ./eza.nix
-          ./fzf.nix
-          ./gallery-dl.nix
-          ./gh.nix
-          ./git-cliff.nix
-          ./gitui.nix
-          ./helix.nix
-          ./himalaya.nix
-          ./htop.nix
-          ./hyfetch.nix
-          ./info.nix
-          ./joshuto.nix
-          ./jujutsu.nix
-          ./less.nix
-          ./lazygit.nix
-          ./micro.nix
-          ./mcfly.nix
-          ./navi.nix
-          ./nnn.nix
-          ./ripgrep.nix
-          ./rbw.nix
-          ./skim.nix
-          ./starship.nix
-          ./tealdeer.nix
-          ./tmux.nix
-          ./zoxide.nix
+          ./misc/commandline
+          ./atuin
+          ./autojump
+          ./bat
+          ./broot
+          ./carapace
+          ./comodoro
+          ./dircolors
+          ./direnv
+          ./eza
+          ./fzf
+          ./gallery-dl
+          ./gh
+          ./git-cliff
+          ./gitui
+          ./helix
+          ./himalaya
+          ./htop
+          ./hyfetch
+          ./info
+          ./joshuto
+          ./jujutsu
+          ./less
+          ./lazygit
+          ./micro
+          ./mcfly
+          ./navi
+          ./nnn
+          ./ripgrep
+          ./rbw
+          ./skim
+          ./starship
+          ./tealdeer
+          ./tmux
+          ./zoxide
         ];
       };
       extra = {
         imports = [
-          ./bottom.nix
-          ./ion.nix
-          ./nushell.nix
-          ./packages.nix
+          ./bottom
+          ./ion
+          ./nushell
+          ./packages
         ];
       };
       graphical = {
         imports = [
-          ./misc/graphical.nix
-          ./alacritty.nix
-          ./cursor.nix
-          ./flameshot.nix
-          ./gtk.nix
-          ./kitty.nix
-          ./wezterm.nix
+          ./misc/graphical
+          ./alacritty
+          ./cursor
+          ./flameshot
+          ./gtk
+          ./kitty
+          ./wezterm
         ];
       };
       internet = {
         imports = [
-          ./misc/internet.nix
-          ./aria2.nix
-          ./chromium.nix
-          ./discord.nix
-          ./firefox.nix
-          ./hexchat.nix
-          ./nheko.nix
-          ./ssh.nix
-          ./syncthing.nix
-          ./thunderbird.nix
-          ./tiny.nix
-          ./tmate.nix
-          ./yt-dlp.nix
+          ./misc/internet
+          ./aria2
+          ./chromium
+          ./discord
+          ./firefox
+          ./hexchat
+          ./nheko
+          ./ssh
+          ./syncthing
+          ./thunderbird
+          ./tiny
+          ./tmate
+          ./yt-dlp
         ];
       };
       media = {
         imports = [
-          ./misc/media.nix
-          ./mangohud.nix
-          ./mpv.nix
-          ./mpris-proxy.nix
-          ./ncmpcpp.nix
-          ./ncspot.nix
-          ./spotify.nix
+          ./misc/media
+          ./mangohud
+          ./mpv
+          ./mpris-proxy
+          ./ncmpcpp
+          ./ncspot
+          ./spotify
         ];
       };
       productivity = {
         imports = [
-          ./misc/productivity.nix
-          ./pandoc.nix
-          ./papis.nix
-          ./sioyek.nix
+          ./misc/productivity
+          ./pandoc
+          ./papis
+          ./sioyek
         ];
       };
       programming = {
         imports = [
-          ./misc/programming.nix
-          ./deployment.nix
-          ./dhall.nix
-          ./editorconfig.nix
-          ./go.nix
-          ./java.nix
-          ./jq.nix
-          ./julia.nix
-          ./k9s.nix
-          ./kakoune.nix
-          ./mercurial.nix
-          ./mise.nix
-          ./neovim.nix
-          ./ocaml.nix
-          ./octant.nix
-          ./piston-cli.nix
-          ./python.nix
-          ./ruby.nix
-          ./scala.nix
-          ./vscode.nix
+          ./misc/programming
+          ./deployment
+          ./dhall
+          ./editorconfig
+          ./go
+          ./java
+          ./jq
+          ./julia
+          ./k9s
+          ./kakoune
+          ./mercurial
+          ./mise
+          ./neovim
+          ./ocaml
+          ./octant
+          ./piston-cli
+          ./python
+          ./ruby
+          ./scala
+          ./vscode
         ];
       };
-      security-tools = import ./security-tools.nix;
+      security-tools = import ./security-tools;
       wayland = {
         imports = [
-          ./misc/wayland.nix
-          ./wayland.nix
-          ./fuzzel.nix
-          ./havoc.nix
-          ./mako.nix
-          ./swaylock.nix
+          ./misc/wayland
+          ./wayland
+          ./fuzzel
+          ./havoc
+          ./mako
+          ./swaylock
         ];
       };
     };
