@@ -19,6 +19,7 @@
           ./bat
           ./broot
           ./carapace
+          ./cava
           ./comodoro
           ./dircolors
           ./direnv
@@ -53,6 +54,7 @@
       extra = {
         imports = [
           ./bottom
+          ./boxxy
           ./ion
           ./nushell
           ./packages
@@ -80,6 +82,7 @@
           ./nheko
           ./ssh
           ./syncthing
+          ./texts
           ./thunderbird
           ./tiny
           ./tmate
@@ -89,9 +92,11 @@
       media = {
         imports = [
           ./misc/media
+          ./apple-music
           ./mangohud
           ./mpv
           ./mpris-proxy
+          ./music163
           ./ncmpcpp
           ./ncspot
           ./spotify
@@ -108,6 +113,7 @@
       programming = {
         imports = [
           ./misc/programming
+          ./bun
           ./deployment
           ./dhall
           ./editorconfig

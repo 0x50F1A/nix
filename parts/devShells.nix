@@ -11,6 +11,9 @@
       ];
       packages = builtins.attrValues {
         inherit (pkgs)
+          alejandra
+          nixfmt-rfc-style
+          nixpkgs-fmt
           colmena
           convco
           just

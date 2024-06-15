@@ -5,9 +5,9 @@ _: {
       extraConfig = ''
         local wezterm = require("wezterm")
         local config = wezterm.config_builder()
-        local gpus = wezterm.gui.enumerate_gpus()
-        config.webgpu_preferred_adapter = gpus[1]
-        -- config.front_end = 'WebGpu'
+        -- local gpus = wezterm.gui.enumerate_gpus()
+        -- config.webgpu_preferred_adapter = gpus[1]
+        config.front_end = 'WebGpu'
         config.enable_wayland = true
         config.hide_tab_bar_if_only_one_tab = true
         config.color_scheme = "Dark Pastel"

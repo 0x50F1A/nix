@@ -34,6 +34,11 @@
       metabigor
       socialscan # : CLI for querying username and email usage on online platforms
       poppler_utils # pdf rendering tools
+
+      ## === Cloud Pentesting ===
+      pacu
+      prowler
+      yatas
     ]
     ++ (lib.optionals pkgs.stdenv.isLinux [
       ## === Reverse Engineering ===

@@ -1,11 +1,11 @@
-{ pkgs, ... }:
-{
+{pkgs, ...}: {
   home.packages = builtins.attrValues {
-    inherit (pkgs)
-      alejandra
+    inherit
+      (pkgs)
       fx
       htmlq
-      just
+      nixfmt-rfc-style
+      serverless
       tidy-viewer
       xsv
       ;
