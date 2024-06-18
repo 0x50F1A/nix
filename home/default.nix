@@ -9,6 +9,7 @@
           ./nix-index
           ./xdg
           ./zsh
+          ../users
         ];
       };
       commandline = {
@@ -21,9 +22,11 @@
           ./carapace
           ./cava
           ./comodoro
+          ./darcs
           ./dircolors
           ./direnv
           ./eza
+          ./fd
           ./fzf
           ./gallery-dl
           ./gh
@@ -64,10 +67,10 @@
         imports = [
           ./misc/graphical
           ./alacritty
-          ./cursor
           ./flameshot
           ./gtk
           ./kitty
+          ./pointerCursor
           ./wezterm
         ];
       };

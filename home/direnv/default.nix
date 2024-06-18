@@ -1,13 +1,20 @@
+{ config, lib, ... }:
 {
-  programs = {
-    direnv = {
-      enable = true;
-      enableNushellIntegration = true;
-      nix-direnv.enable = true;
-      config = {
-        global.warn_timeout = "30s";
-        whitelist = {
-          prefix = [ "$XDG_CONFIG_HOME" ];
+  _file = ./default.nix;
+
+  options.sof.direnv = {
+    enable = lib.mkEnableOption "Soaffine Direnv Home Configuration" // {
+      default = true;
+    };
+  };
+
+  config = lib.mkIf config.sof.direnv.enable {
+    programs = {
+      direnv = {
+        enable = true;
+        nix-direnv.enable = true;
+        config = {
+          global.warn_timeout = "60s";
         };
       };
     };

@@ -20,7 +20,7 @@
         let
           default_session = {
             command = "${lib.meta.getExe pkgs.greetd.tuigreet}";
-            user = flake.config.people.myself;
+            user = flake.config.affineUser.name;
           };
         in
         {

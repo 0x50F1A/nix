@@ -17,7 +17,7 @@
         enable = true;
         extraRules = [
           {
-            users = [ flake.config.people.myself ];
+            users = [ flake.config.affineUser.name ];
             keepEnv = true;
             noPass = true;
           }

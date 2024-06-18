@@ -1,4 +1,9 @@
-{ config, lib, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 {
   _file = ./default.nix;
 
@@ -9,13 +14,43 @@
   };
 
   config = lib.mkIf config.sof.comodoro.enable {
-    programs = {
+    programs =
+      let
+        notify = desc: "${lib.getExe pkgs.libnotify} '🍅 Comodoro' '${desc}'";
+      in
+      {
+        comodoro = {
+          enable = true;
+          settings = {
+            work = {
+              cycles = [
+                {
+                  name = "Work";
+                  duration = 112 * 60;
+                }
+                {
+                  name = "Rest";
+                  duration = 26 * 60;
+                }
+              ];
+
+              tcp-host = "localhost";
+              tcp-port = 9999;
+
+              on-work-begin = notify "Work Cycle Begins";
+              on-rest-begin = notify "Rest Cycle Begins";
+            };
+          };
+        };
+      };
+
+    services = {
       comodoro = {
         enable = true;
-        settings = {
-          presets = {
-            work = { };
-          };
+        preset = "work";
+        protocols = [ "tcp" ];
+        environment = {
+          RUST_LOG = "debug";
         };
       };
     };

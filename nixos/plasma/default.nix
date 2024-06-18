@@ -20,7 +20,7 @@
           settings = {
             Autologin = {
               Session = "plasma.desktop";
-              User = flake.config.people.myself;
+              User = flake.config.affineUser.name;
             };
           };
           wayland = {

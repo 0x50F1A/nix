@@ -1,8 +1,5 @@
+{ flake, pkgs, ... }:
 {
-  flake,
-  pkgs,
-  ...
-}: {
   programs = {
     git = {
       enable = true;
@@ -16,9 +13,9 @@
       # riff = {
       #   enable = true;
       # };
-      userName = flake.config.people.myself;
-      userEmail = flake.config.people.users.${flake.config.people.myself}.email;
+      userName = flake.config.affineUser.name;
+      userEmail = flake.config.affineUser.email;
     };
   };
-  home.packages = [pkgs.git-absorb];
+  home.packages = [ pkgs.git-absorb ];
 }
