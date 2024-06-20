@@ -26,6 +26,7 @@
       email = "bryn.discord@gmail.com";
       sshKeys = [
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOBDGkggZqAPjUEtzl5tJLLLOh8OMElRYSTZqUNnYENH bryn@penguin"
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKjutIbvUj3CCDe18HkvtS14xvlJh3YBvPpdEAFmTYlq bryn.discord@gmail.com"
       ];
       theme.primary = "#ff0000";
       theme.cursor.name = "catppuccin-mocha-sapphire-cursors";

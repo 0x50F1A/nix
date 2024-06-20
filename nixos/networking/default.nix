@@ -44,6 +44,11 @@ in
           name = "en*";
           inherit networkConfig;
         };
+        "40-wireless" = {
+          enable = true;
+          name = "wlp*";
+          inherit networkConfig;
+        };
       };
     };
 

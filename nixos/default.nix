@@ -27,7 +27,7 @@
         ./ccache
         # ./cursor
       ];
-      gaming.imports = [ ./hoyo ];
+      gaming.imports = [./hoyo ./steam];
       graphical.imports = [
         ./autorandr
         ./bluetooth
@@ -36,16 +36,16 @@
         ./plasma
         ./printing
         ./sound
-        ./steam
         ./touchpad
         ./xserver
       ];
+      intel-hd.imports = [./intel-hd];
       networking.imports = [
         ./tailscale
         ./wireguard
       ];
-      nvidia.imports = [ ./nvidia ];
-      wayland.imports = [ ./wayland ];
+      nvidia.imports = [./nvidia];
+      wayland.imports = [./wayland];
       testing = {
         imports = [
           # ./edgedb

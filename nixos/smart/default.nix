@@ -4,7 +4,7 @@
 
   options.sof.smart = {
     enable = lib.mkEnableOption "Soaffine SMART Configuration" // {
-      default = true;
+      default = false;
     };
   };
 
