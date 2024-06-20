@@ -9,7 +9,7 @@
 
   options.sof.nushell = {
     enable = lib.mkEnableOption "Soaffine Nushell Home Configuration" // {
-      default = false;
+      default = true;
     };
   };
 
