@@ -1,4 +1,5 @@
-{config, ...}: {
+{ config, ... }:
+{
   programs = {
     papis = {
       enable = true;

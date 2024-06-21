@@ -1,3 +1,1 @@
-_: {
-  services.mpris-proxy.enable = true;
-}
+_: { services.mpris-proxy.enable = true; }

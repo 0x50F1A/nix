@@ -1,11 +1,9 @@
-{
-  lib,
-  pkgs,
-  ...
-}: let
+{ lib, pkgs, ... }:
+let
   convco_path = lib.getExe pkgs.convco;
   git_path = lib.getExe pkgs.git;
-in {
+in
+{
   just-flake = {
     features = {
       base = {
@@ -31,8 +29,7 @@ in {
       };
       formatting = {
         enable = false;
-        justfile = ''
-        '';
+        justfile = '''';
       };
       git = {
         enable = true;

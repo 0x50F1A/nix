@@ -1,3 +1,4 @@
-{stateVersion, ...}: {
+{ stateVersion, ... }:
+{
   # system = {inherit stateVersion;};
 }

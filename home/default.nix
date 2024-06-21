@@ -4,6 +4,7 @@
       base = {
         imports = [
           ./misc/base
+          ./catppuccin
           ./git
           ./home-manager
           ./nix-index
@@ -31,6 +32,7 @@
           ./gallery-dl
           ./gh
           ./git-cliff
+          ./git-credential-oauth
           ./gitui
           ./helix
           ./himalaya
@@ -136,6 +138,7 @@
           ./ruby
           ./scala
           ./vscode
+          ./zed
         ];
       };
       security-tools = import ./security-tools;

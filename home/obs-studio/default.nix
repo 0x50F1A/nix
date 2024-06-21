@@ -1,3 +1,1 @@
-_: {
-  programs.obs-studio.enable = true;
-}
+_: { programs.obs-studio.enable = true; }

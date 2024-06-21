@@ -1,8 +1,5 @@
-{
-  config,
-  lib,
-  ...
-}: let
+{ config, lib, ... }:
+let
   # https://github.com/daltonmenezes/aura-theme/blob/main/packages/alacritty/aura-theme.toml
   aura_theme = {
     colors = {
@@ -34,22 +31,23 @@
         text = "CellForeground";
         background = "#29263c";
       };
-      cursor = {cursor = "#a277ff";};
+      cursor = {
+        cursor = "#a277ff";
+      };
       search = {
         foreground = "#edecee";
         background = "#a277ff";
       };
     };
   };
-in {
+in
+{
   _file = ./default.nix;
 
   options.sof.alacritty = {
-    enable =
-      lib.mkEnableOption "Soaffine Alacritty Home Configuration"
-      // {
-        default = true;
-      };
+    enable = lib.mkEnableOption "Soaffine Alacritty Home Configuration" // {
+      default = true;
+    };
   };
 
   config = lib.mkIf config.sof.alacritty.enable {

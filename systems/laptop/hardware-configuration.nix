@@ -1,24 +1,42 @@
-{lib, pkgs, ...}: let
-  ntfs_options = ["rw" "allow_other" "uid=1000" "gid=1000" "big_writes"];
-in {
-  imports = [];
+{ lib, pkgs, ... }:
+let
+  ntfs_options = [
+    "rw"
+    "allow_other"
+    "uid=1000"
+    "gid=1000"
+    "big_writes"
+  ];
+in
+{
+  imports = [ ];
   system.stateVersion = "24.05";
   networking.hostName = "laptop";
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
 
   boot = {
     initrd = {
-      availableKernelModules = ["xhci_pci" "ahci" "usb_storage" "nvme" "usbhid" "sd_mod" "sdhci_pci"];
-      kernelModules = [];
-      secrets = {"/crypto_keyfile.bin" = null;};
+      availableKernelModules = [
+        "xhci_pci"
+        "ahci"
+        "usb_storage"
+        "nvme"
+        "usbhid"
+        "sd_mod"
+        "sdhci_pci"
+      ];
+      kernelModules = [ ];
+      secrets = {
+        "/crypto_keyfile.bin" = null;
+      };
     };
-    extraModulePackages = [];
-    kernelModules = ["kvm-intel"];
-    kernelParams = ["mem_sleep_default=deep"];
-    supportedFilesystems = ["ntfs"];
+    extraModulePackages = [ ];
+    kernelModules = [ "kvm-intel" ];
+    kernelParams = [ "mem_sleep_default=deep" ];
+    supportedFilesystems = [ "ntfs" ];
   };
 
-fileSystems."/" = {
+  fileSystems."/" = {
     device = "/dev/disk/by-uuid/929eaab6-05fc-4a53-9665-3b4c10237ca9";
     fsType = "ext4";
   };
@@ -30,8 +48,7 @@ fileSystems."/" = {
     fsType = "vfat";
   };
 
-  
-  swapDevices = [];
+  swapDevices = [ ];
 
   hardware = {
     cpu = {

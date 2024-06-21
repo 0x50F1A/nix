@@ -1,0 +1,15 @@
+{
+  "languages": {
+    "nix": {
+      "enable_language_server": true,
+    }
+  },
+  "formatter": {
+    "external": {
+      "command": "nixfmt",
+      "arguments": ["-"],
+      "standalone": true
+    }
+  },
+  "format_on_save": "off"
+}

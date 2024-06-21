@@ -12,6 +12,10 @@
     #   inputs.nixpkgs.follows = "nixpkgs";
     # };
 
+    catppuccin = {
+      url = "github:catppuccin/nix";
+    };
+
     # colmena-flake = {
     #   url = "github:juspay/colmena-flake";
     # };
@@ -200,18 +204,19 @@
 
   nixConfig = {
     commit-lockfile-summary = "build(inputs): ⬆️ bump flake.lock";
-    extra-substituters = ["https://sofia.cachix.org"];
-    extra-trusted-public-keys = ["sofia.cachix.org-1:xqwE0S1tPcsqfoayNUC0YdsDpj47LQ3Q+YTdDI1WwtE="];
+    extra-substituters = [ "https://sofia.cachix.org" ];
+    extra-trusted-public-keys = [ "sofia.cachix.org-1:xqwE0S1tPcsqfoayNUC0YdsDpj47LQ3Q+YTdDI1WwtE=" ];
   };
 
-  outputs = inputs:
-    inputs.flake-parts.lib.mkFlake {inherit inputs;} {
+  outputs =
+    inputs:
+    inputs.flake-parts.lib.mkFlake { inherit inputs; } {
       debug = true;
       systems = import inputs.systems;
       imports = [
         ./home
         ./nixos
-        (import ./parts {inherit inputs;})
+        (import ./parts { inherit inputs; })
         ./templates
         ./users
       ];
@@ -225,36 +230,26 @@
         schemas = inputs.flake-schemas.schemas;
       };
 
-      perSystem = {
-        config,
-        self,
-        system,
-        ...
-      }: {
-        legacyPackages.homeConfigurations = {
-          desktop =
-            inputs.self.nixos-flake.lib.mkHomeConfiguration (
-              import
-              inputs.nixpkgs
-              {
-                inherit system;
-                config.allowUnfree = true;
-                overlays = [inputs.nur.overlay];
-              }
-            )
-            ./environments/desktop;
-          laptop =
-            inputs.self.nixos-flake.lib.mkHomeConfiguration (
-              import
-              inputs.nixpkgs
-              {
-                inherit system;
-                config.allowUnfree = true;
-                overlays = [inputs.nur.overlay];
-              }
-            )
-            ./environments/laptop;
+      perSystem =
+        {
+          config,
+          self,
+          system,
+          ...
+        }:
+        {
+          legacyPackages.homeConfigurations = {
+            desktop = inputs.self.nixos-flake.lib.mkHomeConfiguration (import inputs.nixpkgs {
+              inherit system;
+              config.allowUnfree = true;
+              overlays = [ inputs.nur.overlay ];
+            }) ./environments/desktop;
+            laptop = inputs.self.nixos-flake.lib.mkHomeConfiguration (import inputs.nixpkgs {
+              inherit system;
+              config.allowUnfree = true;
+              overlays = [ inputs.nur.overlay ];
+            }) ./environments/laptop;
+          };
         };
-      };
     };
 }

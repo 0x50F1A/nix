@@ -1,8 +1,5 @@
+{ config, lib, ... }:
 {
-  config,
-  lib,
-  ...
-}: {
   programs.tealdeer = {
     enable = true;
     settings = {
@@ -19,7 +16,7 @@
     };
   };
 
-  home.activation.ensureTealdeerCacheDir = lib.hm.dag.entryAfter ["writeBoundary"] ''
+  home.activation.ensureTealdeerCacheDir = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
     $DRY_RUN_CMD mkdir -p $VERBOSE_ARG "${config.programs.tealdeer.settings.cache_dir}"
   '';
 }

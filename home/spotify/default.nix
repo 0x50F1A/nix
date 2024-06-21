@@ -1,5 +1,4 @@
-{pkgs, ...}: {
-  home.packages = builtins.attrValues {
-    inherit (pkgs) ncspot psst spotify;
-  };
+{ pkgs, ... }:
+{
+  home.packages = builtins.attrValues { inherit (pkgs) ncspot psst spotify; };
 }

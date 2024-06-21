@@ -8,8 +8,8 @@
   _file = ./default.nix;
 
   options.sof.gh = {
-    enable = lib.mkEnableOption "Soaffine Bun Home Configuration" // {
-      default = false;
+    enable = lib.mkEnableOption "Soaffine Github CLI Home Configuration" // {
+      default = true;
     };
   };
 
@@ -20,7 +20,6 @@
         extensions = builtins.attrValues {
           inherit (pkgs)
             gh-actions-cache
-            gh-dash
             gh-copilot
             gh-eco
             gh-f
@@ -36,6 +35,10 @@
           prompt = "enabled";
         };
       };
+      gh-dash = {
+        enable = true;
+      };
     };
+    home.packages = builtins.attrValues { inherit (pkgs) github-desktop; };
   };
 }

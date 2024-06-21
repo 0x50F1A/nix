@@ -1,8 +1,8 @@
 _: {
   programs = {
     mangohud = {
-      enable = true;
-      enableSessionWide = true;
+      enable = false;
+      enableSessionWide = false;
     };
   };
 }

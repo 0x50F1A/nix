@@ -1,16 +1,11 @@
+{ config, lib, ... }:
 {
-  config,
-  lib,
-  ...
-}: {
   _file = ./default.nix;
 
   options.sof.aria2 = {
-    enable =
-      lib.mkEnableOption "Soaffine Aria2 Home Configuration"
-      // {
-        default = true;
-      };
+    enable = lib.mkEnableOption "Soaffine Aria2 Home Configuration" // {
+      default = true;
+    };
   };
 
   config = lib.mkIf config.sof.aria2.enable {

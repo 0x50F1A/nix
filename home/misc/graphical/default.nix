@@ -1,5 +1,4 @@
-{pkgs, ...}: {
-  home.packages = builtins.attrValues {
-    inherit (pkgs) warp-terminal;
-  };
+{ pkgs, ... }:
+{
+  home.packages = builtins.attrValues { inherit (pkgs) warp-terminal; };
 }

@@ -1,16 +1,11 @@
+{ config, lib, ... }:
 {
-  config,
-  lib,
-  ...
-}: {
   _file = ./default.nix;
 
   options.sof.texts = {
-    enable =
-      lib.mkEnableOption "Soaffine Texts Home Configuration"
-      // {
-        default = false;
-      };
+    enable = lib.mkEnableOption "Soaffine Texts Home Configuration" // {
+      default = false;
+    };
   };
 
   config = lib.mkIf config.sof.texts.enable {

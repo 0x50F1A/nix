@@ -69,9 +69,7 @@ _: {
             };
           };
           set-repeat = "50 300";
-          spawn = [
-            "wezterm"
-          ];
+          spawn = [ "wezterm" ];
         };
         systemd = {
           enable = true;

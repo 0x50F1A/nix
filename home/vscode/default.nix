@@ -1,6 +1,8 @@
-{pkgs, ...}: let
+{ pkgs, ... }:
+let
   vsce = pkgs.vscode-extensions;
-in {
+in
+{
   programs = {
     vscode = {
       enable = true;
@@ -30,7 +32,12 @@ in {
       extensions = builtins.attrValues {
         inherit (vsce.bbenoist) nix;
         inherit (vsce.catppuccin) catppuccin-vsc;
-        inherit (vsce.github) copilot copilot-chat vscode-github-actions vscode-pull-request-github;
+        inherit (vsce.github)
+          copilot
+          copilot-chat
+          vscode-github-actions
+          vscode-pull-request-github
+          ;
       };
     };
   };

@@ -1,12 +1,10 @@
+{ lib, pkgs, ... }:
 {
-  lib,
-  pkgs,
-  ...
-}: {
-  home.packages = with pkgs;
+  home.packages =
+    with pkgs;
     [
       ## === Reverse Engineering ===
-      (binwalk.override {visualizationSupport = pkgs.stdenv.isLinux;})
+      (binwalk.override { visualizationSupport = pkgs.stdenv.isLinux; })
 
       ## === Crypto-Stego ===
       ccrypt
@@ -42,7 +40,7 @@
     ]
     ++ (lib.optionals pkgs.stdenv.isLinux [
       ## === Reverse Engineering ===
-      (binwalk.override {visualizationSupport = true;})
+      (binwalk.override { visualizationSupport = true; })
       radare2
 
       ## === Forensics ===

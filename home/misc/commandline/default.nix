@@ -1,9 +1,9 @@
-{pkgs, ...}: {
+{ pkgs, ... }:
+{
   home.packages = builtins.attrValues {
-    inherit
-      (pkgs)
+    inherit (pkgs)
       # backblaze-b2
-      
+
       bandwhich
       diskonaut
       du-dust
@@ -28,12 +28,11 @@
       procs
       psmisc
       # systeroid # 2024-03-13 # did not build
-      
+
       sysz
       thefuck
       ;
-    inherit
-      (pkgs.bat-extras)
+    inherit (pkgs.bat-extras)
       batdiff
       batgrep
       batman

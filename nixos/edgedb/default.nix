@@ -3,27 +3,27 @@
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   edgedb-server = inputs.edgedb.packages."x86_64-linux".edgedb-server;
   edgedb-cli = inputs.edgedb.packages.x86_64-linux.edgedb-cli;
   working-dir = "/var/lib/edgedb";
   bootstrap-server = pkgs.writeText "bootstrap.edgesql" ''
     ALTER ROLE edgedb SET password := "test";
   '';
-in {
+in
+{
   environment.systemPackages = [
     edgedb-cli
     edgedb-server
   ];
 
-  users.groups.edgedb = {};
+  users.groups.edgedb = { };
   users.users.edgedb = {
     group = "edgedb";
     description = "EdgeDB Server";
     isSystemUser = true;
-    packages = [
-      edgedb-server
-    ];
+    packages = [ edgedb-server ];
   };
 
   system.activationScripts = {
@@ -37,10 +37,13 @@ in {
   systemd.services = {
     "edgedb@" = {
       enable = true;
-      after = ["network.target" "syslog.target"];
+      after = [
+        "network.target"
+        "syslog.target"
+      ];
       description = "EdgeDB Database Service, instance %i";
-      documentation = ["https://edgedb.com"];
-      path = [edgedb-server];
+      documentation = [ "https://edgedb.com" ];
+      path = [ edgedb-server ];
       reload = "${pkgs.coreutils}/bin/kill -HUP $MAINPID";
       script = ''
         ${lib.getExe' edgedb-server "edgedb-server"} \

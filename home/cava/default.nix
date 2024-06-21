@@ -17,6 +17,7 @@
     home.packages = builtins.attrValues { inherit (pkgs) cavalier; };
     programs = {
       cava = {
+        package = pkgs.cava.override { withSDL2 = true; };
         enable = true;
         settings = {
           general = {
@@ -27,7 +28,7 @@
             source = "auto";
           };
           output = {
-            # method = "sdl_glsl"; https://github.com/NixOS/nixpkgs/issues/320129
+            method = "sdl_glsl"; # https://github.com/NixOS/nixpkgs/issues/320129
             # method = "sdl";
             alacritty_sync = 1;
           };

@@ -1,5 +1,6 @@
-{pkgs, ...}: {
-  home.packages = builtins.attrValues {inherit (pkgs) darcs gcc_multi gnumake;};
+{ pkgs, ... }:
+{
+  home.packages = builtins.attrValues { inherit (pkgs) darcs gcc_multi gnumake; };
   programs = {
     opam = {
       enable = true;

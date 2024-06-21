@@ -28,10 +28,23 @@
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOBDGkggZqAPjUEtzl5tJLLLOh8OMElRYSTZqUNnYENH bryn@penguin"
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKjutIbvUj3CCDe18HkvtS14xvlJh3YBvPpdEAFmTYlq bryn.discord@gmail.com"
       ];
-      theme.primary = "#ff0000";
-      theme.cursor.name = "catppuccin-mocha-sapphire-cursors";
-      theme.cursor.package = pkgs.catppuccin-cursors.mochaSapphire;
-      theme.cursor.size = 32;
+      theme =
+        let
+          catppuccinAccent = "sapphire";
+          catppuccinFlavor = "flavor";
+        in
+        {
+          inherit catppuccinAccent catppuccinFlavor;
+          primary = "#ff0000";
+          cursor = {
+            name = "catppuccin-${catppuccinFlavor}-${catppuccinAccent}-cursors";
+            package =
+              pkgs.catppuccin-cursors."${lib.toUpper builtins.substring 0 1 catppuccinAccent}${
+                builtins.substring 1 1000 catppuccinAccent
+              }";
+            size = 32;
+          };
+        };
     };
   };
 }

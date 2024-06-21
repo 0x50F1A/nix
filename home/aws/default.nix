@@ -3,22 +3,20 @@
   lib,
   pkgs,
   ...
-}: {
+}:
+{
   _file = ./default.nix;
 
   options.sof.aws = {
-    enable =
-      lib.mkEnableOption "Soaffine AWS Home Configuration"
-      // {
-        default = true;
-      };
+    enable = lib.mkEnableOption "Soaffine AWS Home Configuration" // {
+      default = true;
+    };
   };
 
   config =
     lib.mkIf config.sof.aws.enable {
       home.packages = builtins.attrValues {
-        inherit
-          (pkgs)
+        inherit (pkgs)
           awsbck
           awsls
           awsume

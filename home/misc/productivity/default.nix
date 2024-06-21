@@ -1,5 +1,4 @@
-{pkgs, ...}: {
-  home.packages = builtins.attrValues {
-    inherit (pkgs) zotero;
-  };
+{ pkgs, ... }:
+{
+  home.packages = builtins.attrValues { inherit (pkgs) zotero; };
 }

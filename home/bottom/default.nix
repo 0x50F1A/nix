@@ -1,16 +1,11 @@
+{ config, lib, ... }:
 {
-  config,
-  lib,
-  ...
-}: {
   _file = ./default.nix;
 
   options.sof.bottom = {
-    enable =
-      lib.mkEnableOption "Soaffine Bottom Home Configuration"
-      // {
-        default = true;
-      };
+    enable = lib.mkEnableOption "Soaffine Bottom Home Configuration" // {
+      default = true;
+    };
   };
 
   config = lib.mkIf config.sof.bottom.enable {

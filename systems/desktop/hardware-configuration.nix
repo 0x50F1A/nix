@@ -1,26 +1,41 @@
-{lib, ...}: let
-  ntfs_options = ["rw" "allow_other" "uid=1000" "gid=1000" "big_writes"];
-in {
-  imports = [];
+{ lib, ... }:
+let
+  ntfs_options = [
+    "rw"
+    "allow_other"
+    "uid=1000"
+    "gid=1000"
+    "big_writes"
+  ];
+in
+{
+  imports = [ ];
   system.stateVersion = "24.05";
   networking.hostName = "desktop";
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
 
   boot = {
     initrd = {
-      availableKernelModules = ["xhci_pci" "ahci" "usb_storage" "nvme" "usbhid" "sd_mod"];
-      kernelModules = [];
+      availableKernelModules = [
+        "xhci_pci"
+        "ahci"
+        "usb_storage"
+        "nvme"
+        "usbhid"
+        "sd_mod"
+      ];
+      kernelModules = [ ];
     };
-    extraModulePackages = [];
-    kernelModules = ["kvm-intel"];
-    supportedFilesystems = ["ntfs"];
+    extraModulePackages = [ ];
+    kernelModules = [ "kvm-intel" ];
+    supportedFilesystems = [ "ntfs" ];
   };
 
   fileSystems = {
     "/" = {
       device = "/dev/disk/by-uuid/67bbf1e9-760c-4ea8-b456-49cc0493d560";
       fsType = "btrfs";
-      options = ["subvol=@"];
+      options = [ "subvol=@" ];
     };
 
     "/boot/efi" = {
@@ -47,7 +62,7 @@ in {
     };
   };
 
-  swapDevices = [];
+  swapDevices = [ ];
 
   hardware = {
     cpu = {
