@@ -12,7 +12,7 @@
     programs = {
       fzf = {
         enable = true;
-        colors = {
+        colors = lib.mkIf (!config.sof.catppuccin.enable) {
           fg = "#cbccc6";
           bg = "#1f2430";
           hl = "#707a8c";

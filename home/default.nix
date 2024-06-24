@@ -18,6 +18,7 @@
           ./misc/commandline
           ./atuin
           ./autojump
+          ./aws
           ./bat
           ./broot
           ./carapace

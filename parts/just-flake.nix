@@ -1,7 +1,14 @@
-{ lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 let
   convco_path = lib.getExe pkgs.convco;
   git_path = lib.getExe pkgs.git;
+  # nix_path = lib.getExe pkgs.${config.flake.affineUser.nixProvider};
+  nix_path = lib.getExe pkgs.lix;
 in
 {
   just-flake = {
@@ -69,7 +76,7 @@ in
 
           # Update and commit lock file
           update:
-            ${lib.getExe pkgs.nix} flake update --commit-lock-file
+            ${nix_path} flake update --commit-lock-file
         '';
       };
       versions = {
@@ -77,7 +84,7 @@ in
         justfile = ''
           # Print out versions of relevant tools
           @versions:
-            ${lib.getExe pkgs.nix} --version
+            ${nix_path} --version
             ${lib.getExe pkgs.colmena} --version
             ${lib.getExe pkgs.sops} --version
         '';

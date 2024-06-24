@@ -15,10 +15,17 @@
   };
 
   config = lib.mkIf config.sof.firefox.enable {
+    home.sessionVariables = {
+      MOZ_ENABLE_WAYLAND = "0";
+    };
+    warnings = lib.optional (config.sof.nushell.enable) ''
+      Firefox currently renders through XWayland due to explicit sync issues.
+    ''; # https://bugzilla.mozilla.org/show_bug.cgi?id=1898476
+
     programs = {
       firefox = {
         enable = true;
-        package = pkgs.firefox-beta;
+        package = pkgs.firefox;
         profiles = {
           default = {
             id = 0;

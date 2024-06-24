@@ -1,4 +1,5 @@
-_: {
+{ config, lib, ... }:
+{
   programs = {
     micro = {
       enable = true;
@@ -7,11 +8,11 @@ _: {
         autosave = 0;
         autosu = false;
         backup = true;
-        backupdir = "~/.config/micro/backups";
+        backupdir = "${config.xdg.dataHome}/micro/backups";
         basename = false;
         clipboard = "external";
         colorcolumn = 80;
-        colorscheme = "atom-dark";
+        colorscheme = lib.mkIf (!config.sof.catppuccin.enable) "atom-dark";
       };
     };
   };

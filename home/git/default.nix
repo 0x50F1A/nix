@@ -25,10 +25,6 @@
         delta = {
           enable = true;
           options = {
-            features = "decorations";
-            decorations = {
-              commit-decoration-style = "bold cyan box ul";
-            };
             hyperlinks = true;
             hyperlinks-file-link-format = "vscode://file/{path}:{line}";
             line-numbers = true;

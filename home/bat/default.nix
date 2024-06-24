@@ -18,7 +18,7 @@
       bat = {
         enable = true;
         config = {
-          theme = "Dracula";
+          theme = lib.mkIf (!config.sof.catppuccin.enable) "Dracula";
         };
         # https://github.com/eth-p/bat-extras
         extraPackages = builtins.attrValues {

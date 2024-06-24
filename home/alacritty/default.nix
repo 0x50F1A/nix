@@ -59,7 +59,7 @@ in
             animation = "EaseOutQuint";
             duration = 0;
           };
-          inherit (aura_theme) colors;
+          colors = lib.mkIf (!config.sof.catppuccin.enable) aura_theme.colors;
           cursor = {
             style = {
               shape = "Beam";

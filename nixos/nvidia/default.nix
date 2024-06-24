@@ -25,8 +25,8 @@
         extraPackages32 = builtins.attrValues {
           inherit (pkgs.pkgsi686Linux) nvidia-vaapi-driver vaapiVdpau;
         };
-        driSupport = true;
-        driSupport32Bit = true;
+        # driSupport = true;
+        # driSupport32Bit = true;
       };
       nvidia = {
         modesetting.enable = true;
