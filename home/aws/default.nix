@@ -32,6 +32,9 @@
       awscli = {
         enable = true;
       };
+      granted = {
+        enable = true;
+      };
     };
 
     # aws-cli does not work well with xdg base directories

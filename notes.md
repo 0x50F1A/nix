@@ -9,3 +9,5 @@ https://github.com/mitchellh/nixos-config
 https://github.com/budimanjojo/dotfiles/blob/main/flake.nix
 
 https://github.com/DPDmancul/dotfiles/blob/64088e88322e24e9fefda6911b96bbbe1a6bf00c/src/modules/home/theme.md
+
+https://github.com/ryan4yin/nix-config/blob/bcf5b8b1cb589d81555b42488c830e13c38daa97/home/base/tui/gpg/README.md

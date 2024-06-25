@@ -7,8 +7,17 @@
 {
   _file = ./default.nix;
 
+  imports = [ ./languages.nix ];
+
   options.sof.helix = {
     enable = lib.mkEnableOption "Soaffine Helix Home Configuration" // {
+      default = true;
+    };
+    markdown.enable = lib.mkEnableOption "markdown support" // {
+      default = true;
+    };
+    defaultEditor = lib.mkOption {
+      type = lib.types.bool;
       default = true;
     };
   };
@@ -17,31 +26,7 @@
     programs = {
       helix = {
         enable = true;
-        defaultEditor = true;
-        languages = {
-          language = [
-            {
-              name = "nix";
-              language-servers = [ "nil" ];
-              roots = [
-                "flake.nix"
-                "flake.json"
-              ];
-              scope = "source.nix";
-              auto-format = true;
-              formatter = {
-                command = "${lib.getExe pkgs.nixfmt-rfc-style}";
-              };
-            }
-            {
-              name = "rust";
-              auto-format = true;
-            }
-          ];
-          language-server.rust-analyzer = {
-            config.check.command = "clippy";
-          };
-        };
+        extraPackages = builtins.attrValues { inherit (pkgs) wl-clipboard xsel; };
         settings = {
           editor = {
             line-number = "relative";
@@ -108,9 +93,11 @@
         };
       };
     };
-    home.sessionVariables = {
-      EDITOR = "hx";
-      VISUAL = "hx";
+    home = lib.mkIf config.sof.helix.defaultEditor {
+      sessionVariables = lib.genAttrs [
+        "EDITOR"
+        "VISUAL"
+      ] (_: lib.getExe config.programs.helix.package);
     };
   };
 }

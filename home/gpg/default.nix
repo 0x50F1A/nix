@@ -9,14 +9,18 @@
 
   options.sof.gpg = {
     enable = lib.mkEnableOption "Soaffine GnuPG Home Configuration" // {
-      default = false;
+      default = true;
     };
   };
 
   config = lib.mkIf config.sof.gpg.enable {
+    warnings = lib.optional (config.sof.gpg.enable) ''
+      GPG is not yet set up!
+    '';
     programs = {
       gpg = {
         enable = true;
+        homedir = "${config.xdg.dataHome}/.gnupg";
         mutableKeys = false;
         mutableTrust = false;
       };
@@ -25,10 +29,10 @@
     services = {
       gpg-agent = {
         enable = true;
-        enableSshSupport = true;
-        sshKeys = [ ];
         enableExtraSocket = true;
+        enableSshSupport = true;
         pinentryPackage = if config.qt.enable then pkgs.pinentry-qt else pkgs.pinentry-curses;
+        sshKeys = [ ];
       };
     };
   };
