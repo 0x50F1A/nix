@@ -12,8 +12,6 @@
     programs = {
       gradle = {
         enable = true;
-        mutableKeys = false;
-        mutableTrust = false;
       };
     };
   };
