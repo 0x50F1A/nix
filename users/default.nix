@@ -14,9 +14,6 @@
     theme = {
       catppuccinAccent = lib.mkOption { type = lib.types.str; };
       catppuccinFlavor = lib.mkOption { type = lib.types.str; };
-      primary = lib.mkOption { type = lib.types.str; };
-      secondary = lib.mkOption { type = lib.types.str; };
-      background = lib.mkOption { type = lib.types.str; };
       cursor = {
         name = lib.mkOption { type = lib.types.str; };
         package = lib.mkOption { type = lib.types.package; };
@@ -49,7 +46,6 @@
         in
         {
           inherit catppuccinAccent catppuccinFlavor;
-          primary = "#ff0000";
           cursor = {
             name = "catppuccin-${catppuccinFlavor}-${catppuccinAccent}-cursors";
             package = pkgs.catppuccin-cursors.${catppuccinPackage};

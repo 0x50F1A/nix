@@ -12,15 +12,7 @@
     fonts = {
       fontconfig = {
         enable = true;
-        defaultFonts = {
-          emoji = [ "Noto Color Emoji" ];
-          monospace = [ "Noto Color Emoji" ];
-          sansSerif = [ "Noto Color Emoji" ];
-          serif = [
-            "Noto Serif"
-            "Noto Color Emoji"
-          ];
-        };
+        inherit (flake.config.affineUser.theme) defaultFonts;
       };
     };
   };
