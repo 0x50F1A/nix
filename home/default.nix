@@ -84,6 +84,7 @@
           ./chromium
           ./discord
           ./firefox
+          ./gpg
           ./hexchat
           ./nheko
           ./ssh
@@ -124,6 +125,7 @@
           ./dhall
           ./editorconfig
           ./go
+          ./gradle
           ./java
           ./jq
           ./julia

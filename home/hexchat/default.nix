@@ -1,15 +1,18 @@
-{ pkgs, ... }:
+{ config, lib, ... }:
 {
-  programs = {
-    hexchat = {
-      enable = true;
-      # theme = {
-      #   source = pkgs.fetchzip {
-      #     url = "https://dl.hexchat.net/themes/Monokai.hct#Monokai.zip";
-      #     sha256 = "sha256-WCdgEr8PwKSZvBMs0fN7E2gOjNM0c2DscZGSKSmdID0=";
-      #     stripRoot = false;
-      #   };
-      # };
+  _file = ./default.nix;
+
+  options.sof.hexchat = {
+    enable = lib.mkEnableOption "Soaffine Hexchat Home Configuration" // {
+      default = false;
+    };
+  };
+
+  config = lib.mkIf config.sof.hexchat.enable {
+    programs = {
+      hexchat = {
+        enable = true;
+      };
     };
   };
 }
