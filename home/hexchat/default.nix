@@ -4,7 +4,7 @@
 
   options.sof.hexchat = {
     enable = lib.mkEnableOption "Soaffine Hexchat Home Configuration" // {
-      default = true;
+      default = false;
     };
   };
 

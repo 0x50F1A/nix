@@ -71,6 +71,14 @@
     #   url = "github:anna328p/intransience";
     # };
 
+    jj_tui = {
+      url = "github:faldor20/jj_tui";
+      inputs = {
+        flake-parts.follows = "flake-parts";
+        nixpkgs.follows = "nixpkgs";
+      };
+    };
+
     just-flake = {
       url = "github:juspay/just-flake";
     };

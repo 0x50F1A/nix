@@ -102,6 +102,24 @@
         "url": "https://flakehub.com/f/DeterminateSystems/flake-schemas/%2A.tar.gz"
       }
     },
+    "flake-utils": {
+      "inputs": {
+        "systems": "systems"
+      },
+      "locked": {
+        "lastModified": 1710146030,
+        "narHash": "sha256-SZ5L6eA7HJ/nmkzGG7/ISclqe6oZdOZTNoesiInkXPQ=",
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "rev": "b1d9ab70662946ef0850d488da1c9019f3a9752a",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "type": "github"
+      }
+    },
     "gitignore": {
       "inputs": {
         "nixpkgs": [
@@ -140,6 +158,30 @@
       "original": {
         "owner": "nix-community",
         "repo": "home-manager",
+        "type": "github"
+      }
+    },
+    "jj_tui": {
+      "inputs": {
+        "flake-parts": [
+          "flake-parts"
+        ],
+        "nixpkgs": [
+          "nixpkgs"
+        ],
+        "ocaml-overlay": "ocaml-overlay"
+      },
+      "locked": {
+        "lastModified": 1719145778,
+        "narHash": "sha256-m3dhdlzDk8H0qNZXxME9QzOSafteVobM/EvFWS4QPgY=",
+        "owner": "faldor20",
+        "repo": "jj_tui",
+        "rev": "4c9027dd9d74da0ef2bb5df5e93fcf7a07832a10",
+        "type": "github"
+      },
+      "original": {
+        "owner": "faldor20",
+        "repo": "jj_tui",
         "type": "github"
       }
     },
@@ -220,6 +262,28 @@
         "type": "github"
       }
     },
+    "ocaml-overlay": {
+      "inputs": {
+        "flake-utils": "flake-utils",
+        "nixpkgs": [
+          "jj_tui",
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1718572869,
+        "narHash": "sha256-Fendny0DmXnJXffYPTIyeixdxkNFD7CBuoisQ2U37WU=",
+        "owner": "nix-ocaml",
+        "repo": "nix-overlays",
+        "rev": "e83c9a2411b1801540622d4c5e66db3f809b5f80",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-ocaml",
+        "repo": "nix-overlays",
+        "type": "github"
+      }
+    },
     "pre-commit-hooks-nix": {
       "inputs": {
         "flake-compat": "flake-compat_2",
@@ -253,6 +317,7 @@
           "home-manager-unstable"
         ],
         "home-manager-unstable": "home-manager-unstable",
+        "jj_tui": "jj_tui",
         "just-flake": "just-flake",
         "nixos-flake": "nixos-flake",
         "nixos-unstable": "nixos-unstable",
@@ -261,11 +326,26 @@
         ],
         "nur": "nur",
         "pre-commit-hooks-nix": "pre-commit-hooks-nix",
-        "systems": "systems",
+        "systems": "systems_2",
         "treefmt-nix": "treefmt-nix"
       }
     },
     "systems": {
+      "locked": {
+        "lastModified": 1681028828,
+        "narHash": "sha256-Vy1rq5AaRuLzOxct8nz4T6wlgyUR7zLU309k9mBC768=",
+        "owner": "nix-systems",
+        "repo": "default",
+        "rev": "da67096a3b9bf56a91d16901293e51ba5b49a27e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-systems",
+        "repo": "default",
+        "type": "github"
+      }
+    },
+    "systems_2": {
       "locked": {
         "lastModified": 1681028828,
         "narHash": "sha256-Vy1rq5AaRuLzOxct8nz4T6wlgyUR7zLU309k9mBC768=",
