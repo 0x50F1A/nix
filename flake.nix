@@ -76,6 +76,7 @@
       inputs = {
         flake-parts.follows = "flake-parts";
         nixpkgs.follows = "nixpkgs";
+        ocaml-overlay.url = "github:0x50F1A/nix-overlays";
       };
     };
 

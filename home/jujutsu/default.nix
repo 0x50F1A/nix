@@ -22,7 +22,7 @@
     };
 
     home.packages = builtins.attrValues {
-      # inherit (flake.inputs.jj_tui.packages.${pkgs.system}) default; # Disabled on 2024-06-25 Because the ocaml overlay uses URL literals
+      inherit (flake.inputs.jj_tui.packages.${pkgs.system}) default; # Disabled on 2024-06-25 Because the ocaml overlay uses URL literals
     };
   };
 }
