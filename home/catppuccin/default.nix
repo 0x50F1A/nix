@@ -50,6 +50,9 @@
         helix = {
           catppuccin.enable = true;
         };
+        k9s = {
+          catppuccin.enable = true;
+        };
         kitty = {
           catppuccin.enable = true;
         };
@@ -60,6 +63,12 @@
           catppuccin.enable = true;
         };
         mpv = {
+          catppuccin.enable = true;
+        };
+        rio = {
+          catppuccin.enable = true;
+        };
+        rofi = {
           catppuccin.enable = true;
         };
         yazi = {
@@ -75,6 +84,7 @@
         };
       };
       gtk = {
+        enable = true;
         catppuccin = {
           inherit accent flavor;
           enable = true;

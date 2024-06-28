@@ -4,14 +4,14 @@
 
   options.sof.eza = {
     enable = lib.mkEnableOption "Soaffine Eza Home Configuration" // {
-      default = true;
+      default = false;
     };
   };
 
   config = lib.mkIf config.sof.eza.enable {
     programs = {
       eza = {
-        enable = false;
+        enable = true;
         icons = true;
         git = true;
       };

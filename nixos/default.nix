@@ -5,6 +5,7 @@
         ./boot
         ./nix
         ./user
+        ./system
       ];
       base.imports = [
         ./environment
@@ -15,7 +16,6 @@
         ./security
         ./services
         ./smart
-        ./system
         ./virtualisation
       ];
       commandline.imports = [
@@ -23,10 +23,7 @@
         ./darling
         ./mtr
       ];
-      development.imports = [
-        ./ccache
-        # ./cursor
-      ];
+      development.imports = [ ./ccache ];
       gaming.imports = [
         ./hoyo
         ./steam
@@ -51,7 +48,8 @@
       wayland.imports = [ ./wayland ];
       testing = {
         imports = [
-          # ./edgedb
+          ./edgedb
+          # ./cursor
           ./lix
         ];
       };

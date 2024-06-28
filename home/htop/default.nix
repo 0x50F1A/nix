@@ -8,7 +8,7 @@
   _file = ./default.nix;
 
   options.sof.htop = {
-    enable = lib.mkEnableOption "Soaffine Nushell Home Configuration" // {
+    enable = lib.mkEnableOption "Soaffine hTop Home Configuration" // {
       default = false;
     };
   };

@@ -14,7 +14,7 @@
   };
 
   config = lib.mkIf config.sof.dhall.enable {
-    warnings = lib.optional (config.sof.bun.enable) ''
+    warnings = lib.optional (config.sof.dhall.enable) ''
       Dhall is enabled system-wide. While this is okay, a better strategy is to leverage devShells per-project.
     '';
 

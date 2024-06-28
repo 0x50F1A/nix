@@ -18,7 +18,7 @@
     home.sessionVariables = {
       MOZ_ENABLE_WAYLAND = "0";
     };
-    warnings = lib.optional (config.sof.nushell.enable) ''
+    warnings = lib.optional (config.sof.firefox.enable) ''
       Firefox currently renders through XWayland due to explicit sync issues.
     ''; # https://bugzilla.mozilla.org/show_bug.cgi?id=1898476
 
@@ -53,12 +53,20 @@
                     url = "https://home-manager-options.extranix.com/";
                   }
                   {
+                    name = "api search";
+                    tags = [
+                      "search"
+                      "nix"
+                    ];
+                    url = "https://search.nixos.org/packages?channel=unstable";
+                  }
+                  {
                     name = "nixos wiki";
                     tags = [
                       "wiki"
                       "nix"
                     ];
-                    url = "https://wiki.nixos.org/";
+                    url = "https://noogle.dev/";
                   }
                   {
                     name = "home manual";
@@ -75,6 +83,14 @@
                       "search"
                     ];
                     url = "https://gitmoji.dev/";
+                  }
+                  {
+                    name = "news";
+                    tags = [
+                      "programming"
+                      "search"
+                    ];
+                    url = "https://news.ycombinator.com/";
                   }
                 ];
               }
@@ -153,6 +169,12 @@
                   iconUpdateURL = "https://wiki.nixos.org/favicon.png";
                   updateInterval = 24 * 60 * 60 * 1000;
                   definedAliases = [ "@nw" ];
+                };
+
+                "NixOS API" = {
+                  urls = [ { template = "https://noogle.dev/q?term={searchTerms}"; } ];
+                  icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
+                  definedAliases = [ "@na" ];
                 };
 
                 "Google".metaData.alias = "@g";

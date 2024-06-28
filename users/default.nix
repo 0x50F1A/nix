@@ -25,6 +25,9 @@
         sansSerif = lib.mkOption { type = lib.types.listOf lib.types.str; };
         serif = lib.mkOption { type = lib.types.listOf lib.types.str; };
       };
+      terminal = {
+        fontSize = lib.mkOption { type = lib.types.float; };
+      };
     };
   };
   config = {
@@ -67,6 +70,9 @@
               "Noto Color Emoji"
             ];
             emoji = [ "Noto Color Emoji" ];
+          };
+          terminal = {
+            fontSize = 16.0;
           };
         };
     };

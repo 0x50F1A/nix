@@ -1,4 +1,9 @@
-{ config, lib, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 {
   _file = ./default.nix;
 
@@ -13,6 +18,11 @@
       enableDebugInfo = true;
       enableNixpkgsReleaseCheck = true;
       stateVersion = "24.05";
+      activation = {
+        nvd = config.lib.dag.entryAnywhere ''
+          ${lib.getExe pkgs.nvd} diff $oldGenPath $newGenPath
+        '';
+      };
     };
     manual = {
       manpages.enable = true;

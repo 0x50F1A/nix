@@ -1,5 +1,6 @@
 {
   config,
+  flake,
   lib,
   pkgs,
   ...
@@ -12,12 +13,15 @@
     };
   };
   config = lib.mkIf config.sof.fonts.enable {
+    warnings = lib.optional (config.sof.fonts.enable) ''
+      NixOS wide defaultFonts currently disabled because it messes up Firefox?
+    '';
     fonts = {
       enableDefaultPackages = true;
       enableGhostscriptFonts = true;
       fontconfig = {
         cache32Bit = true;
-        inherit (config.affineUser.theme) defaultFonts;
+        # inherit (flake.config.affineUser.theme) defaultFonts;
       };
       fontDir = {
         enable = true;

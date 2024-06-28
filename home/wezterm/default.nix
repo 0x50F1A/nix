@@ -1,4 +1,10 @@
-_: {
+{
+  config,
+  flake,
+  lib,
+  ...
+}:
+{
   programs = {
     wezterm = {
       enable = true;
@@ -22,7 +28,7 @@ _: {
         }
         config.warn_about_missing_glyphs = false
         config.allow_square_glyphs_to_overflow_width = 'WhenFollowedBySpace'
-        config.font_size = 16.0
+        config.font_size = ${builtins.toString flake.config.affineUser.theme.terminal.fontSize}
         config.default_cursor_style = 'BlinkingBar'
         return config
       '';

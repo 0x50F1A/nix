@@ -30,6 +30,10 @@
     #   inputs.nixpkgs.follows = "nixpkgs";
     # };
 
+    edgedb = {
+      url = "github:edgedb/packages-nix";
+    };
+
     # fh = {
     #   url = "https://flakehub.com/f/DeterminateSystems/fh/*.tar.gz";
     #   inputs.nixpkgs.follows = "nixpkgs";

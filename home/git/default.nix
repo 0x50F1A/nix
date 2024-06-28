@@ -15,7 +15,7 @@
   };
 
   config = lib.mkIf config.sof.git.enable {
-    warnings = lib.optional (config.sof.nushell.enable) ''
+    warnings = lib.optional (config.sof.git.enable) ''
       Git signing currently uses a hard coded public key 
     '';
     home.file.".ssh/allowed_signers".text = ''
@@ -25,6 +25,7 @@
     programs = {
       git = {
         enable = true;
+        package = pkgs.gitFull;
         delta = {
           enable = true;
           options = {
@@ -44,22 +45,32 @@
         #   signByDefault = true;
         # };
         userName = flake.config.affineUser.name;
-        userEmail = "128620044+0x50F1A@users.noreply.github.com";
+        userEmail = flake.config.affineUser.email;
         extraConfig = {
           commit = {
             gpgsign = true;
+            verbose = true;
           };
           diff = {
             colorMoved = "default";
-          };
-          merge = {
-            conflictstyle = "diff3";
           };
           gpg = {
             format = "ssh";
             ssh = {
               allowedSignersFile = "${config.home.homeDirectory}/.ssh/allowed_signers";
             };
+          };
+          merge = {
+            conflictstyle = "diff3";
+          };
+          pull = {
+            rebase = true;
+          };
+          rerere = {
+            enabled = true;
+          };
+          url = {
+            "git@github.com:".pushinsteadof = "https://github.com";
           };
           user = {
             signingkey = "${config.home.homeDirectory}/.ssh/id_ed25519.pub";
@@ -71,6 +82,7 @@
       inherit (pkgs)
         difftastic
         git-absorb
+        git-branchless
         git-hound
         git-ps-rs
         gitoxide

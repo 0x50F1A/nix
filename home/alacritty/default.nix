@@ -82,9 +82,6 @@ in
               style = "Italic";
             };
           };
-          mouse = {
-            hide_while_typing = true;
-          };
           terminal = {
             osc52 = "Disabled";
           };

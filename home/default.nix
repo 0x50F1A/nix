@@ -7,7 +7,6 @@
           ./catppuccin
           ./git
           ./home-manager
-          ./nix-index
           ./xdg
           ./zsh
           ../users
@@ -23,6 +22,7 @@
           ./broot
           ./carapace
           ./cava
+          ./command-not-found
           ./comodoro
           ./darcs
           ./dircolors
@@ -42,18 +42,26 @@
           ./info
           ./joshuto
           ./jujutsu
-          ./less
           ./lazygit
+          ./lf
+          ./lsd
           ./micro
           ./mcfly
+          ./mr
           ./navi
+          ./nix-index
           ./nnn
+          ./noti
+          ./paging
+          ./pls
           ./ripgrep
           ./rbw
+          ./sapling
           ./skim
           ./starship
           ./tealdeer
           ./tmux
+          ./yazi
           ./zoxide
         ];
       };
@@ -63,7 +71,6 @@
           ./boxxy
           ./ion
           ./nushell
-          ./packages
         ];
       };
       graphical = {
@@ -74,6 +81,9 @@
           ./gtk
           ./kitty
           ./pointerCursor
+          ./rio
+          ./rofi
+          ./sagemath
           ./wezterm
         ];
       };
@@ -86,6 +96,7 @@
           ./firefox
           ./gpg
           ./hexchat
+          ./librewolf
           ./nheko
           ./ssh
           ./syncthing
@@ -100,6 +111,7 @@
         imports = [
           ./misc/media
           ./apple-music
+          ./kodi
           ./mangohud
           ./mpv
           ./mpris-proxy
@@ -107,6 +119,7 @@
           ./ncmpcpp
           ./ncspot
           ./spotify
+          ./spotify-player
         ];
       };
       productivity = {
@@ -135,8 +148,7 @@
           ./mise
           ./neovim
           ./ocaml
-          ./octant
-          ./piston-cli
+          ./pet
           ./python
           ./ruby
           ./scala
@@ -144,7 +156,12 @@
           ./zed
         ];
       };
-      security-tools = import ./security-tools;
+      security-tools = {
+        imports = [ ./security-tools ];
+      };
+      videography = {
+        imports = [ ./obs-studio ];
+      };
       wayland = {
         imports = [
           ./misc/wayland

@@ -10,9 +10,10 @@
 
   config = lib.mkIf config.sof.pointerCursor.enable {
     home.pointerCursor = {
-      inherit (config.affineUser.theme.cursor) name package size;
+      # inherit (config.affineUser.theme.cursor) name package size;
+      inherit (config.affineUser.theme.cursor) size;
       x11.enable = true;
-      gtk.enable = true;
+      # gtk.enable = true;
     };
   };
 }

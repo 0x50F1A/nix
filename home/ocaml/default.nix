@@ -1,14 +1,21 @@
-{ pkgs, ... }:
+{ config, lib, ... }:
 {
-  home.packages = builtins.attrValues { inherit (pkgs) darcs gcc_multi gnumake; };
-  programs = {
-    opam = {
-      enable = true;
+  _file = ./default.nix;
+
+  options.sof.ocaml = {
+    enable = lib.mkEnableOption "Soaffine OCaml Home Configuration" // {
+      default = false;
     };
-    zsh = {
-      initExtra = ''
-        [[ ! -r /home/bryn/.opam/opam-init/init.zsh ]] || source /home/bryn/.opam/opam-init/init.zsh  > /dev/null 2> /dev/null
-      '';
+  };
+
+  config = lib.mkIf config.sof.ocaml.enable {
+    warnings = lib.optional (config.sof.ocaml.enable) ''
+      OCaml is enabled system-wide. While this is okay, a better strategy is to leverage devShells per-project.
+    '';
+    programs = {
+      opam = {
+        enable = true;
+      };
     };
   };
 }

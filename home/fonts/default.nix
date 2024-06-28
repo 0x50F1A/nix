@@ -1,4 +1,9 @@
-{ config, lib, ... }:
+{
+  config,
+  flake,
+  lib,
+  ...
+}:
 {
   _file = ./default.nix;
 

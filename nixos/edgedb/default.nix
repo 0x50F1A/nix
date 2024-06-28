@@ -1,12 +1,14 @@
 {
-  inputs,
+  flake,
   lib,
   pkgs,
   ...
 }:
 let
-  edgedb-server = inputs.edgedb.packages."x86_64-linux".edgedb-server;
-  edgedb-cli = inputs.edgedb.packages.x86_64-linux.edgedb-cli;
+  inherit (flake.inputs.edgedb.packages.${builtins.currentSystem or pkgs.system})
+    edgedb-cli
+    edgedb-server
+    ;
   working-dir = "/var/lib/edgedb";
   bootstrap-server = pkgs.writeText "bootstrap.edgesql" ''
     ALTER ROLE edgedb SET password := "test";
