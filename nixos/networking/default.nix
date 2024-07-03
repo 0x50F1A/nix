@@ -52,7 +52,7 @@ in
       };
     };
 
-    # https://nixos.wiki/wiki/Systemd-networkd#network-online.target
+    # https://wiki.nixos.org/wiki/Systemd-networkd#network-online.target
     systemd.network.wait-online.anyInterface = true;
 
     users.extraUsers.tcpcryptd.group = "tcpcryptd";
