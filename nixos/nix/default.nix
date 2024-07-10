@@ -60,5 +60,7 @@
       };
       overlays = [ ];
     };
+
+    environment.systemPackages = [ pkgs.niv ];
   };
 }

@@ -1,10 +1,4 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}:
-{
+{ config, lib, pkgs, ... }: {
   _file = ./default.nix;
 
   options.sof.nushell = {
@@ -16,8 +10,12 @@
   config = lib.mkIf config.sof.nushell.enable {
     warnings = lib.optional (config.sof.nushell.enable) ''
       Nushell currently depends on a hack for environment variables, to support things like Fzf.
+      Nushell currently does not leverage nix-your-shell
     '';
-    home.packages = builtins.attrValues { inherit (pkgs) jc; };
+    home = {
+      # file."${config.xdg.configHome}/nushell/nix-your-shell.nu".source = pkgs.nix-your-shell.generate-config "nu";
+      packages = builtins.attrValues { inherit (pkgs) jc; };
+    };
     programs = {
       nushell = {
         enable = true;
@@ -30,13 +28,17 @@
           }
 
           let fish_completer = {|spans|
-            ${lib.getExe pkgs.fish} --command $'complete "--do-complete=($spans | str join " ")"'
+            ${
+              lib.getExe pkgs.fish
+            } --command $'complete "--do-complete=($spans | str join " ")"'
             | $"value(char tab)description(char newline)" + $in
             | from tsv --flexible --no-infer
           }
 
           let zoxide_completer = {|spans|
-              $spans | skip 1 | ${lib.getExe pkgs.zoxide} query -l ...$in | lines | where {|x| $x != $env.PWD}
+              $spans | skip 1 | ${
+                lib.getExe pkgs.zoxide
+              } query -l ...$in | lines | where {|x| $x != $env.PWD}
           }
 
           let completer_composition = {|spans|
@@ -50,15 +52,15 @@
 
             match $spans.0 {
               nu => $fish_completer,${
-                # carapace incorrectly completes nu
+              # carapace incorrectly completes nu
                 ""
               }
               git => $fish_completer,${
-                # fish completes commits and branch names nicely
+              # fish completes commits and branch names nicely
                 ""
               }
               ssh => $fish_completer,${
-                # fish completes hosts from ssh config
+              # fish completes hosts from ssh config
                 ""
               }
 
@@ -79,12 +81,10 @@
           }
         '';
         # https://github.com/nix-community/home-manager/issues/4313
-        environmentVariables = builtins.mapAttrs (
-          name: value: "\"${builtins.toString value}\""
-        ) config.home.sessionVariables;
-        shellAliases = {
-          cat = "${lib.getExe pkgs.bat}";
-        };
+        environmentVariables =
+          builtins.mapAttrs (name: value: ''"${builtins.toString value}"'')
+          config.home.sessionVariables;
+        shellAliases = { cat = "${lib.getExe pkgs.bat}"; };
       };
     };
   };

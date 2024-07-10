@@ -1,10 +1,4 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}:
-{
+{ config, lib, pkgs, ... }: {
   _file = ./default.nix;
 
   options.sof.paging = {
@@ -15,22 +9,14 @@
 
   config = lib.mkIf config.sof.paging.enable {
     programs = {
-      less = {
-        enable = true;
-      };
-      lesspipe = {
-        enable = true;
-      };
+      less = { enable = true; };
+      lesspipe = { enable = true; };
     };
     home.packages = builtins.attrValues {
       inherit (pkgs)
-        jless
-        lnav
-        moar
-        ov
-        vgrep
-        ydiff
-        ;
+        jless lnav moar
+        # ov
+        vgrep ydiff;
     };
   };
 }

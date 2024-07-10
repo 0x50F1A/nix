@@ -4,7 +4,8 @@
   inputs = {
     aagl = {
       url = "github:ezKEa/aagl-gtk-on-nix";
-      inputs.nixpkgs.follows = "nixpkgs"; # Name of nixpkgs input you want to use
+      inputs.nixpkgs.follows =
+        "nixpkgs"; # Name of nixpkgs input you want to use
     };
 
     # attic = {
@@ -12,9 +13,15 @@
     #   inputs.nixpkgs.follows = "nixpkgs";
     # };
 
-    catppuccin = {
-      url = "github:catppuccin/nix";
+    bird-nix-lib = {
+      url = "github:spikespaz/bird-nix-lib";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        systems.follows = "systems";
+      };
     };
+
+    catppuccin = { url = "github:catppuccin/nix"; };
 
     # colmena-flake = {
     #   url = "github:juspay/colmena-flake";
@@ -30,9 +37,7 @@
     #   inputs.nixpkgs.follows = "nixpkgs";
     # };
 
-    edgedb = {
-      url = "github:edgedb/packages-nix";
-    };
+    edgedb = { url = "github:edgedb/packages-nix"; };
 
     # fh = {
     #   url = "https://flakehub.com/f/DeterminateSystems/fh/*.tar.gz";
@@ -84,9 +89,7 @@
       };
     };
 
-    just-flake = {
-      url = "github:juspay/just-flake";
-    };
+    just-flake = { url = "github:juspay/just-flake"; };
 
     # lanzaboote = {
     #   url = "https://flakehub.com/f/nix-community/lanzaboote/0.3.0.tar.gz";
@@ -129,9 +132,7 @@
     #   inputs.nixpkgs.follows = "nixpkgs";
     # };
 
-    nixos-flake = {
-      url = "github:srid/nixos-flake";
-    };
+    nixos-flake = { url = "github:srid/nixos-flake"; };
 
     # nixos-2311 = {
     #   url = "github:nixos/nixpkgs/nixos-23.11";
@@ -145,9 +146,7 @@
     #   url = "https://flakehub.com/f/NixOS/nixpkgs/*.tar.gz";
     # };
 
-    nixos-unstable = {
-      url = "github:NixOS/nixpkgs/nixos-unstable";
-    };
+    nixos-unstable = { url = "github:NixOS/nixpkgs/nixos-unstable"; };
 
     # nixos-vscode-server = {
     #   url = "github:nix-community/nixos-vscode-server";
@@ -200,9 +199,7 @@
     #   inputs.nixpkgs.follows = "nixpkgs";
     # };
 
-    systems = {
-      url = "github:nix-systems/default";
-    };
+    systems = { url = "github:nix-systems/default"; };
 
     treefmt-nix = {
       url = "github:numtide/treefmt-nix";
@@ -218,11 +215,11 @@
   nixConfig = {
     commit-lockfile-summary = "build(inputs): ⬆️ bump flake.lock";
     extra-substituters = [ "https://sofia.cachix.org" ];
-    extra-trusted-public-keys = [ "sofia.cachix.org-1:xqwE0S1tPcsqfoayNUC0YdsDpj47LQ3Q+YTdDI1WwtE=" ];
+    extra-trusted-public-keys =
+      [ "sofia.cachix.org-1:xqwE0S1tPcsqfoayNUC0YdsDpj47LQ3Q+YTdDI1WwtE=" ];
   };
 
-  outputs =
-    inputs:
+  outputs = inputs:
     inputs.flake-parts.lib.mkFlake { inherit inputs; } {
       debug = true;
       systems = import inputs.systems;
@@ -243,26 +240,21 @@
         schemas = inputs.flake-schemas.schemas;
       };
 
-      perSystem =
-        {
-          config,
-          self,
-          system,
-          ...
-        }:
-        {
-          legacyPackages.homeConfigurations = {
-            desktop = inputs.self.nixos-flake.lib.mkHomeConfiguration (import inputs.nixpkgs {
+      perSystem = { config, self, system, ... }: {
+        legacyPackages.homeConfigurations = {
+          desktop = inputs.self.nixos-flake.lib.mkHomeConfiguration
+            (import inputs.nixpkgs {
               inherit system;
               config.allowUnfree = true;
               overlays = [ inputs.nur.overlay ];
             }) ./environments/desktop;
-            laptop = inputs.self.nixos-flake.lib.mkHomeConfiguration (import inputs.nixpkgs {
+          laptop = inputs.self.nixos-flake.lib.mkHomeConfiguration
+            (import inputs.nixpkgs {
               inherit system;
               config.allowUnfree = true;
               overlays = [ inputs.nur.overlay ];
             }) ./environments/laptop;
-          };
         };
+      };
     };
 }

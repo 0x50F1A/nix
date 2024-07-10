@@ -1,11 +1,7 @@
 {
   treefmt = {
     flakeCheck = false;
-    programs = {
-      nixfmt-rfc-style = {
-        enable = true;
-      };
-    };
+    programs = { nixfmt-rfc-style = { enable = true; }; };
     projectRootFile = "flake.nix";
   };
 }

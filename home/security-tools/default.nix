@@ -48,6 +48,10 @@
         rustscan
         ssh-audit
 
+        ## === SQL ===
+        sqlmc
+        sqlmap
+
         ## === Information Gathering === (see: https://github.com/fabaff/nix-security-box/blob/main/information-gathering.nix)
         # maigret # Not Building 03/13/24 because of https://github.com/xhtml2pdf/xhtml2pdf/issues/751
         metabigor

@@ -18,7 +18,6 @@
       inherit (pkgs)
         fx
         htmlq
-        nixfmt-rfc-style
         serverless
         tidy-viewer
         xsv

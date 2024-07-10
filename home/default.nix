@@ -61,6 +61,8 @@
           ./starship
           ./tealdeer
           ./tmux
+          ./topgrade
+          ./xplr
           ./yazi
           ./zoxide
         ];
@@ -128,6 +130,7 @@
           ./pandoc
           ./papis
           ./sioyek
+          ./tex
         ];
       };
       programming = {
@@ -152,6 +155,7 @@
           ./python
           ./ruby
           ./scala
+          ./sql
           ./vscode
           ./zed
         ];
@@ -170,6 +174,8 @@
           ./havoc
           ./mako
           ./swaylock
+          ./swayr
+          ./wpaperd
         ];
       };
     };

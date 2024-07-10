@@ -22,6 +22,10 @@
       catppuccin = {
         inherit accent flavor;
         enable = lib.mkDefault true;
+        pointerCursor = {
+          inherit accent flavor;
+          enable = true;
+        };
       };
       programs = {
         bat = {
@@ -84,15 +88,13 @@
         };
       };
       gtk = {
-        enable = true;
         catppuccin = {
           inherit accent flavor;
           enable = true;
-          cursor = {
-            inherit accent flavor;
-            enable = true;
-          };
-          gnomeShellTheme = true;
+          # cursor = {
+          #   inherit accent flavor;
+          #   enable = true;
+          # };
           icon = {
             inherit accent flavor;
             enable = true;

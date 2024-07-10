@@ -1,23 +1,14 @@
-{ lib, pkgs, ... }:
-{
+{ lib, pkgs, ... }: {
   programs.helix = {
     languages = {
       language = [
         {
           name = "nix";
-          language-servers = [
-            "nil"
-            "nixd"
-          ];
-          roots = [
-            "flake.nix"
-            "flake.json"
-          ];
+          language-servers = [ (lib.getExe pkgs.nil) (lib.getExe pkgs.nixd) ];
+          roots = [ "flake.nix" "flake.json" ];
           scope = "source.nix";
           auto-format = true;
-          formatter = {
-            command = "${lib.getExe pkgs.nixfmt-rfc-style}";
-          };
+          formatter = { command = lib.getExe pkgs.nixfmt-rfc-style; };
         }
         {
           name = "rust";
@@ -28,12 +19,10 @@
         nil = {
           command = lib.getExe pkgs.nil;
           config = {
-            nil.formatting.command = [ "${lib.getExe pkgs.nixfmt-rfc-style}" ];
+            nil.formatting.command = [ (lib.getExe pkgs.nixfmt-rfc-style) ];
           };
         };
-        nixd = {
-          command = lib.getExe pkgs.nixd;
-        };
+        nixd = { command = lib.getExe pkgs.nixd; };
         rust-analyzer.config = {
           files = {
             excludeDirs = [ ".direnv" ];
