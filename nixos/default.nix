@@ -31,7 +31,6 @@
       graphical.imports = [
         ./autorandr
         ./bluetooth
-        ./flatpak
         ./fonts
         ./plasma
         ./printing

@@ -5,6 +5,7 @@
         imports = [
           ./misc/base
           ./catppuccin
+          ./flatpak
           ./git
           ./home-manager
           ./xdg
@@ -112,6 +113,7 @@
       media = {
         imports = [
           ./misc/media
+          ./anipy-cli
           ./apple-music
           ./kodi
           ./mangohud
