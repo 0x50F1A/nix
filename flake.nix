@@ -118,6 +118,11 @@
     #   inputs.nixpkgs.follows = "nixpkgs";
     # };
 
+    lobster = {
+      url = "github:justchokingaround/lobster";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # nh = {
     #   url = "github:viperML/nh";
     #   inputs.nixpkgs.follows = "nixpkgs";

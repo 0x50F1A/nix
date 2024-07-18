@@ -4,6 +4,7 @@
       base = {
         imports = [
           ./misc/base
+          ./cachix-agent
           ./catppuccin
           ./flatpak
           ./git
@@ -84,6 +85,7 @@
           ./gtk
           ./kitty
           ./pointerCursor
+          ./qt
           ./rio
           ./rofi
           ./sagemath
@@ -94,6 +96,7 @@
         imports = [
           ./misc/internet
           ./aria2
+          ./borgmatic
           ./chromium
           ./discord
           ./firefox
@@ -113,8 +116,8 @@
       media = {
         imports = [
           ./misc/media
-          ./anipy-cli
           ./apple-music
+          ./easyeffects
           ./kodi
           ./mangohud
           ./mpv
@@ -129,10 +132,14 @@
       productivity = {
         imports = [
           ./misc/productivity
+          ./activitywatch
+          ./espanso
           ./pandoc
           ./papis
           ./sioyek
           ./tex
+          ./zathura
+          ./zk
         ];
       };
       programming = {

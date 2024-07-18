@@ -8,6 +8,9 @@
 let
   mpv-config = import ./nix/sources.nix;
   shaderDirectory = "${config.xdg.dataHome}/mpv/shaders";
+  mkGLSLShaderList =
+    shaderStringList:
+    builtins.concatStringsSep ":" (map (shader: "${shaderDirectory}/${shader}.glsl") shaderStringList);
 in
 {
   _file = ./default.nix;
@@ -23,10 +26,7 @@ in
       mpv = {
         enable = true;
         config = {
-          ytdl-format = "bestvideo+bestaudio";
-          ytdl-raw-options = "ignore-config=,sub-lang=en,write-auto-sub=";
           ### Video ###
-
           vo = "gpu-next";
           gpu-api = "auto";
           # priority = "high";
@@ -34,33 +34,24 @@ in
           # hwdec = "d3d11va-copy";
           profile = "high-quality";
           # d3d11-adapter = "NVIDIA";
-
           scale-antiring = 0.6;
           dscale-antiring = 0.6;
           cscale-antiring = 0.6;
-
           display-fps-override = 60;
           video-sync = "display-resample";
-
           deband = false;
           deband-iterations = 1;
           deband-threshold = 48;
           deband-range = 16;
           deband-grain = 32;
-
           temporal-dither = true;
-
           ## HDR -> SDR ##
-
           #tone-mapping=bt.2446a
           #tone-mapping-mode=luma
           #target-colorspace-hint=yes
-
           ### Audio and Subtitles ###
-
           slang = "en,eng,English";
           alang = "ja,jp,jpn,jap,Japanese,en,eng,English";
-
           sub-blur = 0.5;
           sub-scale = 0.7;
           sub-margin-y = 60;
@@ -70,7 +61,6 @@ in
           sub-back-color = "#00000000";
           sub-border-color = "#266a678c";
           sub-shadow-color = "#00000000";
-
           sub-auto = "all";
           volume-max = 150;
           sub-fix-timing = true;
@@ -84,9 +74,7 @@ in
           demuxer-mkv-subtitle-preroll = true;
           sub-file-paths = "sub;subs;subtitles";
           af-add = "dynaudnorm=g=5:f=250:r=0.9:p=0.5";
-
           ### General ###
-
           fs = true;
           snap-window = true;
           # alpha = "blend";
@@ -94,9 +82,7 @@ in
           geometry = "50%:50%";
           save-position-on-quit = true;
           watch-later-options-remove = "pause";
-
           ### OSD/OSC ###
-
           osc = false;
           border = false;
           osd-bar = false;
@@ -108,7 +94,6 @@ in
           MBTN_LEFT cycle pause #@click
           MBTN_LEFT script-binding evafast/speedup #@press
           MBTN_LEFT script-binding evafast/slowdown #@release
-
           ALT+d cycle deband
           tab script-binding uosc/flash-ui
           p script-binding webtorrent/toggle-info
@@ -119,9 +104,7 @@ in
           ALT+z script-message-to uosc show-submenu-blurred "Audio"
           ALT+x script-message-to uosc show-submenu-blurred "Subtitles"
           ALT+s script-message-to uosc show-submenu-blurred "Video > Shaders"
-
           ### UOSC Menu Config ###
-
           h script-binding memo-history                                                               #! File > History
           / script-binding console/enable                                                             #! File > Console
           # script-binding uosc/playlist                                                              #! File > Playlist
@@ -129,25 +112,24 @@ in
           ALT+c script-binding uosc/chapters                                                          #! File > Chapters
           b script-binding uosc/open-file                                                             #! File > Open File
           # script-binding uosc/show-in-directory                                                     #! File > Open in File Explorer
-
           # apply-profile Deband-Medium                                                               #! Video > Filters > Deband (Medium)
           # apply-profile Deband-Strong                                                               #! Video > Filters > Deband (Strong)
-          n cycle-values glsl-shaders "~~/shaders/nlmeans_HQ.glsl" "~~/shaders/nlmeans_L_HQ.glsl" ""  #! Video > Shaders > Denoise
-          # change-list glsl-shaders toggle ~~/shaders/adasharp.glsl                                  #! Video > Shaders > Sharpen > Sharpen
-          # change-list glsl-shaders toggle ~~/shaders/NVSharpen.glsl                                 #! Video > Shaders > Sharpen > SharpenNV
-          # change-list glsl-shaders toggle ~~/shaders/CAS.glsl                                       #! Video > Shaders > Sharpen > SharpenCAS
-          # change-list glsl-shaders toggle ~~/shaders/adasharpA.glsl                                 #! Video > Shaders > Line Art > Sharpen
-          # change-list glsl-shaders toggle ~~/shaders/A4K_Thin.glsl                                  #! Video > Shaders > Line Art > Thin Line
-          # change-list glsl-shaders toggle ~~/shaders/A4K_Dark.glsl                                  #! Video > Shaders > Line Art > Dark Line
-          # change-list glsl-shaders toggle ~~/shaders/F16.glsl                                       #! Video > Shaders > Neural Scaler > FSRCNNX 16
-          # change-list glsl-shaders toggle ~~/shaders/ravu_L_ar_r4.hook                              #! Video > Shaders > Neural Scaler > Ravu Lite ar r4
-          # change-list glsl-shaders toggle ~~/shaders/ravu_Z_ar_r3.hook ; no-osd set cscale-antiring 0 ; set dscale-antiring 0 ; set cscale-antiring 0 #! Video > Shaders > Neural Scaler > Ravu Zoom ar r3
-          # change-list glsl-shaders toggle ~~/shaders/F16_LA.glsl                                    #! Video > Shaders > Neural Scaler > FSRCNNX Line Art
-          # change-list glsl-shaders toggle ~~/shaders/A4K_Upscale_L.glsl                             #! Video > Shaders > Neural Scaler > Anime4K Upscale L
-          # change-list glsl-shaders toggle ~~/shaders/ssimsr.glsl                                    #! Video > Shaders > Generic Scaler > SSimSuperRes
-          # change-list glsl-shaders toggle ~~/shaders/CfL_P.glsl                                     #! Video > Shaders > Generic Scaler > CfL Prediction
-          # change-list glsl-shaders toggle ~~/shaders/ssimds.glsl ; no-osd set linear-downscaling no #! Video > Shaders > Generic Scaler > SSimDownscaler
-          # change-list glsl-shaders toggle ~~/shaders/FSR_EASU.glsl                                  #! Video > Shaders > Generic Scaler > AMD FidelityFX Super Resolution EASU
+          n cycle-values glsl-shaders "${shaderDirectory}/nlmeans_HQ.glsl" "${shaderDirectory}/nlmeans_L_HQ.glsl" ""  #! Video > Shaders > Denoise
+          # change-list glsl-shaders toggle ${shaderDirectory}/adasharp.glsl                                  #! Video > Shaders > Sharpen > Sharpen
+          # change-list glsl-shaders toggle ${shaderDirectory}/NVSharpen.glsl                                 #! Video > Shaders > Sharpen > SharpenNV
+          # change-list glsl-shaders toggle ${shaderDirectory}/CAS.glsl                                       #! Video > Shaders > Sharpen > SharpenCAS
+          # change-list glsl-shaders toggle ${shaderDirectory}/adasharpA.glsl                                 #! Video > Shaders > Line Art > Sharpen
+          # change-list glsl-shaders toggle ${shaderDirectory}/A4K_Thin.glsl                                  #! Video > Shaders > Line Art > Thin Line
+          # change-list glsl-shaders toggle ${shaderDirectory}/A4K_Dark.glsl                                  #! Video > Shaders > Line Art > Dark Line
+          # change-list glsl-shaders toggle ${shaderDirectory}/F16.glsl                                       #! Video > Shaders > Neural Scaler > FSRCNNX 16
+          # change-list glsl-shaders toggle ${shaderDirectory}/ravu_L_ar_r4.hook                              #! Video > Shaders > Neural Scaler > Ravu Lite ar r4
+          # change-list glsl-shaders toggle ${shaderDirectory}/ravu_Z_ar_r3.hook ; no-osd set cscale-antiring 0 ; set dscale-antiring 0 ; set cscale-antiring 0 #! Video > Shaders > Neural Scaler > Ravu Zoom ar r3
+          # change-list glsl-shaders toggle ${shaderDirectory}/F16_LA.glsl                                    #! Video > Shaders > Neural Scaler > FSRCNNX Line Art
+          # change-list glsl-shaders toggle ${shaderDirectory}/A4K_Upscale_L.glsl                             #! Video > Shaders > Neural Scaler > Anime4K Upscale L
+          # change-list glsl-shaders toggle ${shaderDirectory}/ssimsr.glsl                                    #! Video > Shaders > Generic Scaler > SSimSuperRes
+          # change-list glsl-shaders toggle ${shaderDirectory}/CfL_P.glsl                                     #! Video > Shaders > Generic Scaler > CfL Prediction
+          # change-list glsl-shaders toggle ${shaderDirectory}/ssimds.glsl ; no-osd set linear-downscaling no #! Video > Shaders > Generic Scaler > SSimDownscaler
+          # change-list glsl-shaders toggle ${shaderDirectory}/FSR_EASU.glsl                                  #! Video > Shaders > Generic Scaler > AMD FidelityFX Super Resolution EASU
           Ctrl+3 apply-profile Upscale-FSR                                                            #! Video > Shaders > Profiles > Upscale FSR
           Ctrl+2 apply-profile Upscale-Ravu                                                           #! Video > Shaders > Profiles > Upscale Ravu
           Ctrl+1 apply-profile Upscale-FSRCNNX                                                        #! Video > Shaders > Profiles > Upscale FSRCNNX
@@ -157,7 +139,6 @@ in
           c change-list glsl-shaders clr all                                                          #! Video > Shaders > Clear All
           g cycle interpolation                                                                       #! Video > Interpolation
           # script-binding uosc/video                                                                 #! Video > Select Video Track
-
           F1 af toggle "lavfi=[loudnorm=I=-14:TP=-3:LRA=4]" ; show-text "''${af}"                     #! Audio > Dialogue
           # af clr ""                                                                                 #! Audio > Clear Filters
           # script-binding afilter/toggle-eqr                                                         #! Audio > Toggle Equalizer
@@ -165,7 +146,6 @@ in
           # script-binding afilter/toggle-dnm                                                         #! Audio > Toggle Normalizer
           # script-binding afilter/toggle-drc                                                         #! Audio > Toggle Compressor
           # script-binding uosc/audio                                                                 #! Audio > Select Audio Track
-
           y script-binding uosc/load-subtitles                                                        #! Subtitles > Load
           Y script-binding uosc/subtitles                                                             #! Subtitles > Select
           ALT+j add sub-scale +0.05                                                                   #! Subtitles > Bigger
@@ -189,45 +169,72 @@ in
           };
           "Upscale-FSRCNNX" = {
             glsl-shaders-clr = true;
-            glsl-shaders = "${shaderDirectory}/F16.glsl;${shaderDirectory}/CfL_P.glsl;${shaderDirectory}/ssimsr.glsl;${shaderDirectory}/ssimds.glsl";
+            glsl-shaders = mkGLSLShaderList [
+              "F16"
+              "CfL_P"
+              "ssimsr"
+              "ssimds"
+            ];
             linear-downscaling = false;
           };
           "Upscale-Ravu" = {
             glsl-shaders-clr = true;
-            glsl-shaders = "${shaderDirectory}/ravu_Z_ar_r3.glsl;${shaderDirectory}/CfL_P.glsl;${shaderDirectory}/ssimds.glsl";
-
+            glsl-shaders = mkGLSLShaderList [
+              "ravu_Z_ar_r3"
+              "CfL_P"
+              "ssimds"
+            ];
             linear-downscaling = false;
           };
           "Upscale-FSR" = {
             glsl-shaders-clr = true;
-            glsl-shaders = "${shaderDirectory}/CfL_P.glsl;${shaderDirectory}/FSR_EASU.glsl;${shaderDirectory}/ssimds.glsl";
+            glsl-shaders = mkGLSLShaderList [
+              "CfL_P"
+              "FSR_EASU"
+              "ssimds"
+            ];
             linear-downscaling = false;
           };
           "Enhance-LA" = {
             glsl-shaders-clr = true;
-            glsl-shaders = "${shaderDirectory}/CfL_P.glsl;${shaderDirectory}/A4K_Dark.glsl;${shaderDirectory}/A4K_Thin.glsl;${shaderDirectory}/adasharpA.glsl";
+            glsl-shaders = mkGLSLShaderList [
+              "CfL_P"
+              "A4K_Dark"
+              "A4K_Thin"
+              "adasharpA"
+            ];
           };
           "UpscaleLA-FSRCNNX" = {
             glsl-shaders-clr = true;
-            glsl-shaders = "${shaderDirectory}/F16_LA.glsl;${shaderDirectory}/CfL_P.glsl;${shaderDirectory}/ssimsr.glsl;${shaderDirectory}/ssimds.glsl";
+            glsl-shaders = mkGLSLShaderList [
+              "F16_LA"
+              "CfL_P"
+              "ssimsr"
+              "ssimds"
+            ];
             linear-downscaling = false;
           };
           "UpscaleLA-A4K" = {
             glsl-shaders-clr = true;
-            glsl-shaders = "${shaderDirectory}/A4K_Upscale_L.glsl;${shaderDirectory}/CfL_P.glsl;${shaderDirectory}/ssimsr.glsl;${shaderDirectory}/ssimds.glsl";
+            glsl-shaders = mkGLSLShaderList [
+              "A4K_Upscale_L"
+              "CfL_P"
+              "ssimsr"
+              "ssimds"
+            ];
             linear-downscaling = false;
           };
-
           ### Conditional Profiles ###
-
           "4k-Downscaling" = {
             profile-cond = ''(height >= 2160 or width >= 3840);'';
             profile-restore = "copy-equal";
             glsl-shaders-clr = true;
-            glsl-shaders = "${shaderDirectory}/CfL_P.glsl;${shaderDirectory}/ssimds.glsl";
+            glsl-shaders = mkGLSLShaderList [
+              "CfL_P"
+              "ssimds"
+            ];
             linear-downscaling = false;
           };
-
           "Downmix-Audio-5.1" = {
             profile-cond = ''get("audio-params/channel-count") >= 5 and get("audio-params/channel-count") < 7'';
             profile-restore = "copy-equal";
@@ -241,22 +248,17 @@ in
             af = ''lavfi="lowpass=c=LFE:f=120,volume=1.6,pan=stereo|FL=0.5*FC+0.3*FLC+0.3*FL+0.3*BL+0.3*SL+0.5*LFE|FR=0.5*FC+0.3*FRC+0.3*FR+0.3*BR+0.3*SR+0.5*LFE"'';
           };
           ## General Anime Profile (Applies to any video in a folder called 'Anime') ##
-
-          Anime = {
+          "Anime" = {
             profile-cond = ''require'mp.utils'.join_path(working_directory, path):match('\\Anime\\')'';
             profile-restore = "copy-equal";
-
             deband = true;
             deband-iterations = 2;
             deband-threshold = 35;
             deband-range = 20;
             deband-grain = 5;
-
             sub-scale = 0.75;
           };
-
           ## Hides unwanted webtorrent entries in memo script ##
-
           Webtorrent-Entries = {
             profile-cond = ''string.match(string.lower(string.gsub(require "mp.utils".join_path(get("working-directory", ""), get("path", "")), string.gsub(get("filename", ""), "([^%w])", "%%%1").."$", "")), "webtorrent")'';
             profile-restore = "copy-equal";
@@ -288,8 +290,6 @@ in
             show_speed_toggled = true;
             # Show seek actions on the osd (or flash timeline if using uosc)
             show_seek = true;
-            # Look ahead for smoother transition when subs_speed_cap is set
-            lookahead = false;
           };
           memo = {
             # File path gets expanded, leave empty for in-memory history

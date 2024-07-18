@@ -28,6 +28,9 @@
         };
       };
       programs = {
+        alacritty = {
+          catppuccin.enable = true;
+        };
         bat = {
           catppuccin.enable = true;
         };
@@ -35,6 +38,12 @@
           catppuccin.enable = true;
         };
         cava = {
+          catppuccin.enable = true;
+        };
+        fish = {
+          catppuccin.enable = true;
+        };
+        foot = {
           catppuccin.enable = true;
         };
         fzf = {
@@ -49,6 +58,9 @@
           };
         };
         gitui = {
+          catppuccin.enable = true;
+        };
+        glamour = {
           catppuccin.enable = true;
         };
         helix = {
@@ -69,13 +81,22 @@
         mpv = {
           catppuccin.enable = true;
         };
+        neovim = {
+          catppuccin.enable = true;
+        };
         rio = {
           catppuccin.enable = true;
         };
         rofi = {
           catppuccin.enable = true;
         };
+        starship = {
+          catppuccin.enable = true;
+        };
         yazi = {
+          catppuccin.enable = true;
+        };
+        zathura = {
           catppuccin.enable = true;
         };
         zellij = {
@@ -91,10 +112,6 @@
         catppuccin = {
           inherit accent flavor;
           enable = true;
-          # cursor = {
-          #   inherit accent flavor;
-          #   enable = true;
-          # };
           icon = {
             inherit accent flavor;
             enable = true;

@@ -14,7 +14,6 @@
   };
 
   config = lib.mkIf config.sof.sound.enable {
-    sound.enable = true;
     hardware.pulseaudio = {
       enable = false;
       extraModules = [ pkgs.pulseaudio-modules-bt ];

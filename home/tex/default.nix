@@ -12,7 +12,7 @@
     programs = {
       texlive = {
         enable = true;
-        extraPackages = "tpkgs: {inherit (tpkgs) collection-basic collection-fontsrecommended algorithms;}";
+        extraPackages = tpkgs: { inherit (tpkgs) collection-basic collection-fontsrecommended algorithms; };
       };
     };
   };

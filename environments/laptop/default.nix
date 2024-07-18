@@ -13,8 +13,10 @@ in
     homeModules.graphical
     homeModules.internet
     homeModules.media
+    homeModules.productivity
     homeModules.programming
     homeModules.security-tools
+    homeModules.wayland
     ./configuration.nix
   ];
 }

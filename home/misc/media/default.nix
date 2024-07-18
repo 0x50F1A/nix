@@ -22,6 +22,8 @@
         handbrake
         libgen-cli
         ;
+      inherit (flake.inputs.anipy-cli.packages.${(builtins.currentSystem or pkgs.system)}) default;
+      inherit (flake.inputs.lobster.packages.${(builtins.currentSystem or pkgs.system)}) lobster;
     };
   };
 }

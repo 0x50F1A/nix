@@ -26,6 +26,7 @@
           "wheel"
           "video"
           "audio"
+          "input" # Needed for Espanso
         ];
         hashedPassword = "$y$j9T$Xrr9lauxcb9nD0P9h94qK/$NIjdpHuxCbrOOtp5Oo5g1zEBRaEskialcka5qm3VX29";
         openssh.authorizedKeys.keys = flake.config.affineUser.sshKeys;

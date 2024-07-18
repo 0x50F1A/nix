@@ -26,7 +26,7 @@
     programs = {
       helix = {
         enable = true;
-        extraPackages = builtins.attrValues { inherit (pkgs) wl-clipboard xsel; };
+        extraPackages = builtins.attrValues { inherit (pkgs) wl-clipboard-rs xsel; };
         settings = {
           editor = {
             line-number = "relative";
