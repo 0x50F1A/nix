@@ -101,6 +101,7 @@
           ./chromium
           ./discord
           ./firefox
+          ./gemini
           ./glance
           ./gpg
           ./hexchat
