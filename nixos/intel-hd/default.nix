@@ -18,16 +18,14 @@
         pkgs.vdpauinfo
       ];
       variables = {
-        VDPAU_DRIVER = lib.mkIf config.hardware.opengl.enable (lib.mkDefault "va_gl");
-        LIBVA_DRIVER_NAME = lib.mkIf config.hardware.opengl.enable (lib.mkDefault "iHD");
+        VDPAU_DRIVER = "va_gl";
+        LIBVA_DRIVER_NAME = "iHD";
       };
     };
 
     hardware = {
-      opengl = {
+      graphics = {
         enable = true;
-        driSupport = true;
-        driSupport32Bit = true;
         extraPackages = builtins.attrValues {
           inherit (pkgs)
             intel-media-driver
@@ -51,9 +49,6 @@
         };
       };
     };
-
-    # boot.initrd.kernelModules = ["i915"];
-    # boot.kernelParams = ["i915.force_probe=9b41"];
 
     services = {
       xserver = {
