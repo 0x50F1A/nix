@@ -32,7 +32,6 @@
         ./autorandr
         ./bluetooth
         ./fonts
-        ./gstreamer
         ./plasma
         ./printing
         ./sound
