@@ -111,6 +111,7 @@
                 enhancer-for-youtube
                 fastforwardteam
                 github-file-icons
+                new-tab-override
                 pay-by-privacy
                 privacy-pass
                 pronoundb

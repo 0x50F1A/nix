@@ -56,7 +56,7 @@
                 "Super+Alt+Shift K" = "resize vertical -100";
                 "Super+Alt+Shift L" = "resize horizontal 100";
                 "Super+Shift Return" = "spawn wezterm";
-                "Super+Shift B" = "spawn microsoft-edge-dev";
+                "Super+Shift B" = "spawn firefox";
                 "Super+Shift E" = "exit";
                 "Super+Shift H" = "send-layout-cmd rivertile 'main-count +1'";
                 "Super+Shift J" = "swap next";

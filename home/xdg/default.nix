@@ -1,4 +1,9 @@
-{ config, lib, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 {
   _file = ./default.nix;
 
@@ -20,6 +25,16 @@
           XDG_PROJECTS_DIR = "${config.home.homeDirectory}/Projects";
           XDG_WORKSPACES_DIR = "${config.home.homeDirectory}/Workspaces";
         };
+      };
+      portal = {
+        enable = true;
+        configPackages = builtins.attrValues {
+          inherit (pkgs) xdg-desktop-portal-wlr xdg-desktop-portal-kde xdg-desktop-portal-gtk;
+        };
+        extraPortals = builtins.attrValues {
+          inherit (pkgs) xdg-desktop-portal-wlr xdg-desktop-portal-kde xdg-desktop-portal-gtk;
+        };
+        xdgOpenUsePortal = true;
       };
     };
   };

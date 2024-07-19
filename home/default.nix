@@ -56,6 +56,7 @@
           ./noti
           ./paging
           ./pls
+          ./pueue
           ./ripgrep
           ./rbw
           ./sapling
@@ -100,6 +101,7 @@
           ./chromium
           ./discord
           ./firefox
+          ./glance
           ./gpg
           ./hexchat
           ./librewolf

@@ -119,7 +119,7 @@
               }
               {
                 trigger = ":thewrongabstraction";
-                replcae = "https://sandimetz.com/blog/2016/1/20/the-wrong-abstraction";
+                replace = "https://sandimetz.com/blog/2016/1/20/the-wrong-abstraction";
               }
               {
                 trigger = ":tryit";
@@ -400,7 +400,7 @@
                 replace = "≝";
               }
               {
-                trigger = ":del";
+                trigger = ":ddel";
                 replace = "∇";
               }
               {

@@ -4,6 +4,8 @@
   options.affineUser = {
     name = lib.mkOption { type = lib.types.str; };
     email = lib.mkOption { type = lib.types.str; };
+    location = lib.mkOption { type = lib.types.str; };
+    hourFormat = lib.mkOption { type = lib.types.str; };
     nixProvider = lib.mkOption { type = lib.types.str; };
     sshKeys = lib.mkOption {
       type = lib.types.listOf lib.types.str;
@@ -34,6 +36,8 @@
     affineUser = {
       name = "bryn";
       email = "bryn.discord@gmail.com";
+      location = "Calgary, Canada";
+      hourFormat = "24h";
       nixProvider = "lix";
       sshKeys = [
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOBDGkggZqAPjUEtzl5tJLLLOh8OMElRYSTZqUNnYENH bryn@penguin"
