@@ -106,18 +106,6 @@
     #   inputs.nixpkgs.follows = "nixpkgs";
     # };
 
-    # Lix is now in nixpkgs, so is there much reason to use these?
-    # lix = {
-    #   url = "git+https://git.lix.systems/lix-project/lix?ref=refs/tags/2.90-beta.1";
-    #   flake = false;
-    # };
-
-    # lix-module = {
-    #   url = "git+https://git.lix.systems/lix-project/nixos-module";
-    #   inputs.lix.follows = "lix";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    # };
-
     lobster = {
       url = "github:justchokingaround/lobster";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -145,6 +133,11 @@
     #   url = "github:nix-community/nix-index-database";
     #   inputs.nixpkgs.follows = "nixpkgs";
     # };
+
+    nix-topology = {
+      url = "github:oddlama/nix-topology";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     # nix-vscode-extensions = {
     #   url = "github:nix-community/nix-vscode-extensions";
@@ -269,6 +262,7 @@
         {
           config,
           self,
+          self',
           system,
           ...
         }:

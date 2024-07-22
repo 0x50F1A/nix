@@ -3,6 +3,7 @@
     nixosModules = {
       default.imports = [
         ./boot
+        ./lix
         ./nix
         ./user
         ./system
@@ -40,6 +41,7 @@
       ];
       intel-hd.imports = [ ./intel-hd ];
       networking.imports = [
+        ./nix-topology
         ./tailscale
         ./wireguard
       ];
@@ -47,9 +49,8 @@
       wayland.imports = [ ./wayland ];
       testing = {
         imports = [
-          ./edgedb
+          # ./edgedb
           # ./cursor
-          ./lix
         ];
       };
     };

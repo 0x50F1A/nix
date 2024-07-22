@@ -5,6 +5,7 @@ let
 in
 {
   imports = [
+    inputs.nix-topology.nixosModules.default
     self.nixosModules.default
     self.nixosModules.base
     self.nixosModules.commandline
