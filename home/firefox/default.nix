@@ -182,6 +182,11 @@
               };
             };
             settings = {
+              app = {
+                update = {
+                  auto = false;
+                };
+              };
               browser = {
                 search = {
                   region = "US";
@@ -196,6 +201,9 @@
               };
               extensions = {
                 autoDisableScopes = false;
+                update = {
+                  enabled = false;
+                };
               };
               general = {
                 useragent.locale = "en-US";

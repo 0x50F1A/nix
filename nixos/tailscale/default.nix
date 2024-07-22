@@ -17,15 +17,13 @@ in
   };
 
   config = lib.mkIf config.sof.tailscale.enable {
+    warnings = lib.optional (config.sof.tailscale.enable) ''
+      Tailscale is not using an auth key file.
+    '';
+
     # In the future:
     # https://github.com/juanfont/headscale
-    # May want to implement this to no longer depend upon  the closed source black box control server
-
-    # https://tailscale.com/kb/1019/subnets?tab=linux#enable-ip-forwarding
-    boot.kernel.sysctl = {
-      "net.ipv4.ip_forward" = "1";
-      "net.ipv6.conf.all.forwarding" = "1";
-    };
+    # May want to implement this to no longer depend upon the closed source black box control server
 
     environment.systemPackages = [ pkgs.tailscale ];
     services.tailscale = {
@@ -39,16 +37,7 @@ in
         trustedInterfaces = [ interfaceName ];
         checkReversePath = "loose";
         interfaces.${interfaceName} = {
-          allowedTCPPorts = [
-            22
-            config.services.tailscale.port
-          ];
-          allowedTCPPortRanges = [
-            {
-              from = 8000;
-              to = 8999;
-            }
-          ];
+          allowedTCPPorts = [ config.services.tailscale.port ];
           allowedUDPPorts = [ config.services.tailscale.port ];
         };
       };
@@ -59,6 +48,26 @@ in
       };
       nftables = {
         enable = true;
+      };
+    };
+
+    systemd.network.networks."50-tailscale" = {
+      enable = true;
+      name = interfaceName;
+      matchConfig = {
+        Name = interfaceName;
+      };
+      linkConfig = {
+        Unmanaged = true;
+        ActivationPolicy = "manual";
+      };
+    };
+
+    topology.self = {
+      interfaces = {
+        tailscale0 = {
+          type = "tailscale";
+        };
       };
     };
   };

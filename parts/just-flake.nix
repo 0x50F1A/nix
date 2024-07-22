@@ -1,13 +1,7 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}:
+{ lib, pkgs, ... }:
 let
   convco_path = lib.getExe pkgs.convco;
   git_path = lib.getExe pkgs.git;
-  # nix_path = lib.getExe pkgs.${config.flake.affineUser.nixProvider};
   nix_path = lib.getExe pkgs.lix;
 in
 {
@@ -55,6 +49,17 @@ in
           # Edit The Justfile
           edit:
             ${lib.getExe pkgs.helix} {{justfile()}}
+        '';
+      };
+      networking = {
+        enable = true;
+        justfile = ''
+          # Build and save a nix-topology diagram
+          [linux]
+          topology:
+            ${nix_path} build .#topology.x86_64-linux.config.output
+            cp --force ./result/* ./media/topology/
+            rm -r ./result
         '';
       };
       nixos = {

@@ -47,10 +47,10 @@
       url = "github:edgedb/packages-nix";
     };
 
-    # fh = {
-    #   url = "https://flakehub.com/f/DeterminateSystems/fh/*.tar.gz";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    # };
+    fh = {
+      url = "https://flakehub.com/f/DeterminateSystems/fh/*.tar.gz";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     flake-parts = {
       url = "github:hercules-ci/flake-parts";

@@ -9,7 +9,7 @@
   };
 
   config = lib.mkIf config.sof.tmate.enable {
-    warnings = lib.optional (config.sof.nushell.enable) ''
+    warnings = lib.optional (config.sof.tmate.enable) ''
       Tmate needs an API key to be set secretly.
     '';
     programs = {

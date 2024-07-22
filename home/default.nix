@@ -6,6 +6,7 @@
           ./misc/base
           ./cachix-agent
           ./catppuccin
+          ./flakehub
           ./flatpak
           ./git
           ./home-manager
