@@ -58,7 +58,7 @@
                       "search"
                       "nix"
                     ];
-                    url = "https://search.nixos.org/packages?channel=unstable";
+                    url = "https://noogle.dev/";
                   }
                   {
                     name = "nixos wiki";
@@ -66,7 +66,7 @@
                       "wiki"
                       "nix"
                     ];
-                    url = "https://noogle.dev/";
+                    url = "https://wiki.nixos.org/wiki/NixOS_Wiki";
                   }
                   {
                     name = "home manual";

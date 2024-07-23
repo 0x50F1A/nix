@@ -14,6 +14,9 @@
       fstrim = {
         enable = true;
       };
+      fwupd = {
+        enable = true;
+      };
       ntpd-rs = {
         enable = true;
       };

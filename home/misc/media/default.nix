@@ -19,7 +19,7 @@
       inherit (pkgs)
         chafa
         ffmpeg-full
-        handbrake
+        # handbrake # 2024-07-23 failed to build
         libgen-cli
         oxipng
         upscayl

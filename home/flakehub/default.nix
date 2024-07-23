@@ -15,6 +15,6 @@
   };
 
   config = lib.mkIf config.sof.flakehub.enable {
-    home.packages = builtins.attrValues { inherit (flake.inputs.fh.${pkgs.system}) default; };
+    home.packages = builtins.attrValues { inherit (flake.inputs.fh.packages.${pkgs.system}) default; };
   };
 }

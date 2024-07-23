@@ -22,6 +22,7 @@
       [
         ## === Reverse Engineering ===
         (binwalk.override { visualizationSupport = pkgs.stdenv.isLinux; })
+        frida-tools
         gef
         ghidra
         # hex # This package conflicts with Helix as they both try to use the 'hx' binary
