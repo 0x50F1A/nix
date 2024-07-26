@@ -754,6 +754,22 @@
         "type": "github"
       }
     },
+    "nixpkgs-stable_3": {
+      "locked": {
+        "lastModified": 1721524707,
+        "narHash": "sha256-5NctRsoE54N86nWd0psae70YSLfrOek3Kv1e8KoXe/0=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "556533a23879fc7e5f98dd2e0b31a6911a213171",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "release-24.05",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
     "nixpkgs_2": {
       "locked": {
         "lastModified": 1709816690,
@@ -771,11 +787,11 @@
     },
     "nur": {
       "locked": {
-        "lastModified": 1721947103,
-        "narHash": "sha256-+yzj4QQMGhuk/KhdYT51t2QB9/rwIbVMsxhHctJ+f9Y=",
+        "lastModified": 1721972683,
+        "narHash": "sha256-YC3+q4bf2sCtceusVo8a2ri81muMDXslubOzoTGgujw=",
         "owner": "nix-community",
         "repo": "NUR",
-        "rev": "c0cdc702bf33188ebd6518af5fc94d1bdab702e3",
+        "rev": "9dc107c69c20807063e32b0241a63efa7c19ad8e",
         "type": "github"
       },
       "original": {
@@ -918,6 +934,7 @@
         ],
         "nur": "nur",
         "pre-commit-hooks-nix": "pre-commit-hooks-nix",
+        "sops-nix": "sops-nix",
         "systems": "systems_8",
         "treefmt-nix": "treefmt-nix_2"
       }
@@ -985,6 +1002,27 @@
       "original": {
         "type": "file",
         "url": "https://devimages-cdn.apple.com/design/resources/download/SF-Pro.dmg"
+      }
+    },
+    "sops-nix": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ],
+        "nixpkgs-stable": "nixpkgs-stable_3"
+      },
+      "locked": {
+        "lastModified": 1721688883,
+        "narHash": "sha256-9jsjsRKtJRqNSTXKj9zuDFRf2PGix30nMx9VKyPgD2U=",
+        "owner": "Mic92",
+        "repo": "sops-nix",
+        "rev": "aff2f88277dabe695de4773682842c34a0b7fd54",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Mic92",
+        "repo": "sops-nix",
+        "type": "github"
       }
     },
     "systems": {
