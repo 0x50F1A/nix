@@ -5,6 +5,7 @@
         ./boot
         ./lix
         ./nix
+        ./sops-nix
         ./user
         ./system
       ];
@@ -42,6 +43,7 @@
       intel-hd.imports = [ ./intel-hd ];
       networking.imports = [
         ./nix-topology
+        ./openssh
         ./tailscale
         ./wireguard
       ];

@@ -112,6 +112,7 @@
                 fastforwardteam
                 github-file-icons
                 new-tab-override
+                omnivore
                 pay-by-privacy
                 privacy-pass
                 pronoundb

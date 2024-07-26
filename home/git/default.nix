@@ -15,9 +15,6 @@
   };
 
   config = lib.mkIf config.sof.git.enable {
-    warnings = lib.optional (config.sof.git.enable) ''
-      Git signing currently uses a hard coded public key 
-    '';
     home.file.".ssh/allowed_signers".text = ''
       * ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILrN+tLxImC5Y6jGjSkhf2lGVUWp3m00r+7kM/eZA0ON sofia
       * ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKjutIbvUj3CCDe18HkvtS14xvlJh3YBvPpdEAFmTYlq sofia
@@ -39,11 +36,6 @@
         lfs = {
           enable = true;
         };
-        # signing = {
-        #   gpgPath = lib.getExe pkgs.gnupg;
-        #   key = null;
-        #   signByDefault = true;
-        # };
         userName = flake.config.affineUser.name;
         userEmail = flake.config.affineUser.email;
         extraConfig = {

@@ -12,6 +12,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    apple-fonts = {
+      url = "github:Lyndeno/apple-fonts.nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # attic = {
     #   url = "https://flakehub.com/f/zhaofengli/attic/*.tar.gz";
     #   inputs.nixpkgs.follows = "nixpkgs";
@@ -206,9 +211,10 @@
     #   url = "github:juspay/services-flake";
     # };
 
-    # sops-nix = {
-    #   url = "github:Mic92/sops-nix";
-    # };
+    sops-nix = {
+      url = "github:Mic92/sops-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     # srvos = {
     #   url = "github:nix-community/srvos";

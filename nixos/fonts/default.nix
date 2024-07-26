@@ -1,5 +1,6 @@
 {
   config,
+  flake,
   lib,
   pkgs,
   ...
@@ -45,11 +46,19 @@
             roboto
             lexend
             ;
+          inherit (flake.inputs.apple-fonts.packages.${pkgs.system})
+            ny
+            ny-nerd
+            sf-mono
+            sf-pro
+            sf-pro-nerd
+            ;
         }
         ++ [
           (pkgs.nerdfonts.override {
             fonts = [
               "FiraCode"
+              "JetBrainsMono"
               "Meslo"
             ];
           })

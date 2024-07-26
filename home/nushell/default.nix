@@ -1,4 +1,10 @@
-{ config, lib, pkgs, ... }: {
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+{
   _file = ./default.nix;
 
   options.sof.nushell = {
@@ -8,83 +14,63 @@
   };
 
   config = lib.mkIf config.sof.nushell.enable {
-    warnings = lib.optional (config.sof.nushell.enable) ''
-      Nushell currently depends on a hack for environment variables, to support things like Fzf.
-      Nushell currently does not leverage nix-your-shell
-    '';
     home = {
-      # file."${config.xdg.configHome}/nushell/nix-your-shell.nu".source = pkgs.nix-your-shell.generate-config "nu";
       packages = builtins.attrValues { inherit (pkgs) jc; };
     };
     programs = {
       nushell = {
         enable = true;
-        # https://github.com/n3oney/nixus/blob/eef49b9e5e5c76e0b808f4c4334ce169e1c053de/modules/programs/nushell.nix#L118
         configFile.text = ''
           $env.TRANSIENT_PROMPT_COMMAND = "\u{f17b5} "
 
+          $env.PATH = ($env.PATH | split row (char esep) | prepend "${config.xdg.configHome}/carapace/bin")
+
+          def --env get-env [name] { $env | get $name }
+          def --env set-env [name, value] { load-env { $name: $value } }
+          def --env unset-env [name] { hide-env $name }
+
           let carapace_completer = {|spans|
-            ${lib.getExe pkgs.carapace} $spans.0 nushell ...$spans | from json
-          }
+            # if the current command is an alias, get it's expansion
+            let expanded_alias = (scope aliases | where name == $spans.0 | get -i 0 | get -i expansion)
 
-          let fish_completer = {|spans|
-            ${
-              lib.getExe pkgs.fish
-            } --command $'complete "--do-complete=($spans | str join " ")"'
-            | $"value(char tab)description(char newline)" + $in
-            | from tsv --flexible --no-infer
-          }
-
-          let zoxide_completer = {|spans|
-              $spans | skip 1 | ${
-                lib.getExe pkgs.zoxide
-              } query -l ...$in | lines | where {|x| $x != $env.PWD}
-          }
-
-          let completer_composition = {|spans|
-            let expanded_alias = scope aliases | where name == $spans.0 | get -i 0.expansions
-
-            let spans = if $expanded_alias != null {
-              $spans | skip 1 | prepend ($expanded_alias | split row ' ' | take 1)
+            # overwrite
+            let spans = (if $expanded_alias != null  {
+              # put the first word of the expanded alias first in the span
+              $spans | skip 1 | prepend ($expanded_alias | split row " " | take 1)
             } else {
               $spans
-            }
+            })
 
-            match $spans.0 {
-              nu => $fish_completer,${
-              # carapace incorrectly completes nu
-                ""
-              }
-              git => $fish_completer,${
-              # fish completes commits and branch names nicely
-                ""
-              }
-              ssh => $fish_completer,${
-              # fish completes hosts from ssh config
-                ""
-              }
-
-              z => $zoxide_completer,
-
-              _ => $carapace_completer
-            } | do $in $spans
+            carapace $spans.0 nushell ...$spans
+            | from json
           }
+
+          mut current = (($env | default {} config).config | default {} completions)
+          $current.completions = ($current.completions | default {} external)
+          $current.completions.external = ($current.completions.external
+          | default true enable
+          | default $carapace_completer completer)
+
+          $env.config = $current
 
           $env.config = {
             show_banner: false
-            completions: {
-              external: {
-                enable: true
-                completer: $completer_composition
-              }
-            }
           }
         '';
         # https://github.com/nix-community/home-manager/issues/4313
-        environmentVariables =
-          builtins.mapAttrs (name: value: ''"${builtins.toString value}"'')
-          config.home.sessionVariables;
-        shellAliases = { cat = "${lib.getExe pkgs.bat}"; };
+        environmentVariables = builtins.mapAttrs (
+          name: value: ''"${builtins.toString value}"''
+        ) config.home.sessionVariables;
+        extraConfig = ''
+          source ${config.xdg.cacheHome}/nix-your-shell/init.nu
+        '';
+        extraEnv = ''
+          ${lib.getExe pkgs.nix-your-shell} nu |
+            save --force ${config.xdg.cacheHome}/nix-your-shell/init.nu
+        '';
+        shellAliases = {
+          cat = "${lib.getExe pkgs.bat}";
+        };
       };
     };
   };

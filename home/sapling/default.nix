@@ -1,4 +1,10 @@
-{ config, flake, lib, ... }: {
+{
+  config,
+  flake,
+  lib,
+  ...
+}:
+{
   _file = ./default.nix;
 
   options.sof.sapling = {
@@ -8,12 +14,9 @@
   };
 
   config = lib.mkIf config.sof.sapling.enable {
-    warnings = lib.optional (config.sof.sapling.enable) ''
-      Sapling is disabled for not building as of 2024-07-09
-    '';
     programs = {
       sapling = {
-        enable = false;
+        enable = false; # Did not build on 2024-07-25
         userName = flake.config.affineUser.name;
         userEmail = flake.config.affineUser.email;
       };

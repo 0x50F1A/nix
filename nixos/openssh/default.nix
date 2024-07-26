@@ -12,7 +12,6 @@
       settings = {
         PermitRootLogin = "prohibit-password";
         PasswordAuthentication = false;
-        allowSFTP = false;
       };
     };
 

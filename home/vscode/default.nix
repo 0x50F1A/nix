@@ -75,28 +75,16 @@ in
           }
           ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
             {
-              publisher = "dustypomerleau";
-              name = "rust-syntax";
-              version = "0.6.1";
-              sha256 = "sha256-o9iXPhwkimxoJc1dLdaJ8nByLIaJSpGX/nKELC26jGU=";
-            }
-            {
-              publisher = "JScearcy";
-              name = "rust-doc-viewer";
-              version = "4.2.0";
-              sha256 = "sha256-x1pmrw8wYHWyNIJqVdoh+vasbHDG/A4m8vDZU0DnPzo=";
+              publisher = "fill-labs";
+              name = "dependi";
+              version = "0.7.2";
+              sha256 = "sha256-S3R1oLk7facP5Rn9czmHlffhMtLNrSaGYbaU3/x6/aM=";
             }
             {
               publisher = "magicstack";
               name = "edgedb";
               version = "0.1.7";
               sha256 = "sha256-poW1BhurhHZRS+FVSOL6PRl95wdHqux3kzbTvs5Q9Ik=";
-            }
-            {
-              publisher = "swellaby";
-              name = "vscode-rust-test-adapter";
-              version = "0.11.0";
-              sha256 = "sha256-IgfcIRF54JXm9l2vVjf7lFJOVSI0CDgDjQT+Hw6FO4Q=";
             }
             {
               publisher = "vsls-contrib";
@@ -111,10 +99,28 @@ in
               sha256 = "sha256-XjYPr5CBxIwnNBffKXrFD0/jTOXB42ebfgZiljWPZWk=";
             }
             {
-              publisher = "fill-labs";
-              name = "dependi";
-              version = "0.7.2";
-              sha256 = "sha256-S3R1oLk7facP5Rn9czmHlffhMtLNrSaGYbaU3/x6/aM=";
+              publisher = "FelixZeller";
+              name = "markdown-oxide";
+              version = "1.1.0";
+              sha256 = "sha256-Qy+eW9bnrjeEJfGHPdmKM/CYRjwUjJKoHdWA8CY8gx4=";
+            }
+            {
+              publisher = "dustypomerleau";
+              name = "rust-syntax";
+              version = "0.6.1";
+              sha256 = "sha256-o9iXPhwkimxoJc1dLdaJ8nByLIaJSpGX/nKELC26jGU=";
+            }
+            {
+              publisher = "JScearcy";
+              name = "rust-doc-viewer";
+              version = "4.2.0";
+              sha256 = "sha256-x1pmrw8wYHWyNIJqVdoh+vasbHDG/A4m8vDZU0DnPzo=";
+            }
+            {
+              publisher = "swellaby";
+              name = "vscode-rust-test-adapter";
+              version = "0.11.0";
+              sha256 = "sha256-IgfcIRF54JXm9l2vVjf7lFJOVSI0CDgDjQT+Hw6FO4Q=";
             }
           ];
         userSettings = {

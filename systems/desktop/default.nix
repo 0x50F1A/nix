@@ -18,8 +18,8 @@ in
     ./hardware-configuration.nix
     {
       sof.wireguard = {
-        peerKey = "5PtTH6ccK9HiiZQlmXDWbBBD7Uz4xO2pel3iVwYVwkA=";
-        peerAddress = "37.19.199.149:51820";
+        peerKey = "MBXy2opbHbpJG1VKo2JjwnSx172hNuDx/Yj6qUT/RBk=";
+        peerAddress = "149.40.58.145:51820";
       };
       systemd.network.networks = {
         "10-ethernet" = {

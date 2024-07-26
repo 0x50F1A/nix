@@ -14,10 +14,6 @@
   };
 
   config = lib.mkIf config.sof.atuin.enable {
-    warnings = lib.optional (config.sof.atuin.enable) ''
-      Atuin key has not yet been SOPS encrypted.
-    '';
-
     programs = {
       atuin = {
         enable = true;
@@ -35,7 +31,7 @@
           };
           auto_sync = true;
           filter_mode = "session";
-          # key_path = "/home/soaffine/.config/atuin/keys/atuin.key"; #SOPS ME
+          key_path = "/run/user/1000/atuin.key";
           show_preview = true;
           sync_frequency = 0;
           update_check = false;
@@ -47,6 +43,7 @@
     systemd.user.services.atuin-daemon = {
       Unit = {
         Description = "atuin shell history daemon";
+        After = lib.mkIf (config.sof.sops.enable) [ "sops-nix.service" ];
       };
       Service = {
         ExecStart = "${lib.getExe pkgs.atuin} daemon";

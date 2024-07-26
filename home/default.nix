@@ -10,6 +10,7 @@
           ./flatpak
           ./git
           ./home-manager
+          ./sops-nix
           ./xdg
           ./zsh
           ../users
@@ -138,6 +139,7 @@
           ./misc/productivity
           ./activitywatch
           ./espanso
+          ./obsidian
           ./pandoc
           ./papis
           ./sioyek

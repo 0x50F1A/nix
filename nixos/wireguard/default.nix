@@ -4,9 +4,6 @@
   pkgs,
   ...
 }:
-let
-  interfaceName = "wg0";
-in
 {
   _file = ./default.nix;
 
@@ -14,28 +11,28 @@ in
     enable = lib.mkEnableOption "Soaffine WireGuard Systemd Configuration" // {
       default = true;
     };
-
+    interfaceName = lib.mkOption {
+      type = lib.types.str;
+      default = "wg0";
+    };
     peerKey = lib.mkOption { type = lib.types.str; };
     peerAddress = lib.mkOption { type = lib.types.str; };
   };
 
   config = lib.mkIf config.sof.wireguard.enable {
-    warnings = lib.optional (config.sof.wireguard.enable) ''
-      WG key has not yet been SOPS encrypted.
-    '';
     environment.systemPackages = [ pkgs.wireguard-tools ];
     networking.firewall.allowedUDPPorts = [ 51820 ];
     systemd.network = {
       enable = true;
       netdevs = {
-        "10-${interfaceName}" = {
+        "10-${config.sof.wireguard.interfaceName}" = {
           enable = true;
           netdevConfig = {
             Kind = "wireguard";
-            Name = interfaceName;
+            Name = config.sof.wireguard.interfaceName;
           };
           wireguardConfig = {
-            PrivateKeyFile = "/run/wireguard-keys/proton-private";
+            PrivateKeyFile = "/run/wireguard-proton-private";
             ListenPort = 51820;
           };
           wireguardPeers = [
@@ -50,9 +47,9 @@ in
           ];
         };
       };
-      networks."${interfaceName}" = {
+      networks."${config.sof.wireguard.interfaceName}" = {
         enable = true;
-        matchConfig.Name = interfaceName;
+        matchConfig.Name = config.sof.wireguard.interfaceName;
         networkConfig = {
           Address = [ "10.2.0.2/24" ];
         };

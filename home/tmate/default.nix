@@ -4,14 +4,11 @@
 
   options.sof.tmate = {
     enable = lib.mkEnableOption "Soaffine Tmate Home Configuration" // {
-      default = true;
+      default = false;
     };
   };
 
   config = lib.mkIf config.sof.tmate.enable {
-    warnings = lib.optional (config.sof.tmate.enable) ''
-      Tmate needs an API key to be set secretly.
-    '';
     programs = {
       tmate = {
         enable = true;

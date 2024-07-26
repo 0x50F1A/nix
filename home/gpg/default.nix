@@ -14,13 +14,10 @@
   };
 
   config = lib.mkIf config.sof.gpg.enable {
-    warnings = lib.optional (config.sof.gpg.enable) ''
-      GPG is not yet set up!
-    '';
     programs = {
       gpg = {
         enable = true;
-        homedir = "${config.xdg.dataHome}/.gnupg";
+        homedir = "${config.xdg.dataHome}/gnupg";
         mutableKeys = false;
         mutableTrust = false;
       };
