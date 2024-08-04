@@ -21,7 +21,7 @@ in
     programs = {
       vscode = {
         enable = true;
-        enableExtensionUpdateCheck = false;
+        enableExtensionUpdateCheck = true;
         enableUpdateCheck = false;
         mutableExtensionsDir = false;
         extensions =
@@ -115,6 +115,12 @@ in
               name = "rust-doc-viewer";
               version = "4.2.0";
               sha256 = "sha256-x1pmrw8wYHWyNIJqVdoh+vasbHDG/A4m8vDZU0DnPzo=";
+            }
+            {
+              publisher = "chrischinchilla";
+              name = "vale-vscode";
+              version = "0.20.0";
+              sha256 = "sha256-17lYuZjQYCDguznO+a8rOtEH6Kvei3dXuOGVstPmKRE=";
             }
             {
               publisher = "swellaby";
@@ -233,6 +239,12 @@ in
               shellIntegration = {
                 enabled = true;
               };
+            };
+          };
+          vale = {
+            valeCLI = {
+              installVale = false;
+              path = lib.getExe pkgs.vale;
             };
           };
           workbench = {

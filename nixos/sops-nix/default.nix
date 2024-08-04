@@ -22,9 +22,7 @@
         "proton-${config.networking.hostName}" = {
           owner = "systemd-network";
           group = "systemd-network";
-          mode = "0600";
-          path =
-            config.systemd.network.netdevs."10-${config.sof.wireguard.interfaceName}".wireguardConfig.PrivateKeyFile;
+          path = config.sof.wireguard.privateKeyFile;
           sopsFile = ../../secrets/api.yaml;
         };
       };

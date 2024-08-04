@@ -46,6 +46,7 @@
         ./openssh
         ./tailscale
         ./wireguard
+        ./wireguard-quick
       ];
       nvidia.imports = [ ./nvidia ];
       wayland.imports = [ ./wayland ];

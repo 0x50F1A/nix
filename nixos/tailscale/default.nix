@@ -17,14 +17,6 @@ in
   };
 
   config = lib.mkIf config.sof.tailscale.enable {
-    warnings = lib.optional (config.sof.tailscale.enable) ''
-      Tailscale is not using an auth key file.
-    '';
-
-    # In the future:
-    # https://github.com/juanfont/headscale
-    # May want to implement this to no longer depend upon the closed source black box control server
-
     environment.systemPackages = [ pkgs.tailscale ];
     services.tailscale = {
       enable = true;
@@ -48,18 +40,6 @@ in
       };
       nftables = {
         enable = true;
-      };
-    };
-
-    systemd.network.networks."50-tailscale" = {
-      enable = true;
-      name = interfaceName;
-      matchConfig = {
-        Name = interfaceName;
-      };
-      linkConfig = {
-        Unmanaged = true;
-        ActivationPolicy = "manual";
       };
     };
 

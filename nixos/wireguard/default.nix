@@ -9,7 +9,7 @@
 
   options.sof.wireguard = {
     enable = lib.mkEnableOption "Soaffine WireGuard Systemd Configuration" // {
-      default = true;
+      default = false;
     };
     interfaceName = lib.mkOption {
       type = lib.types.str;
@@ -17,6 +17,10 @@
     };
     peerKey = lib.mkOption { type = lib.types.str; };
     peerAddress = lib.mkOption { type = lib.types.str; };
+    privateKeyFile = lib.mkOption {
+      type = lib.types.str;
+      default = "/run/wireguard-proton-private";
+    };
   };
 
   config = lib.mkIf config.sof.wireguard.enable {
@@ -32,7 +36,7 @@
             Name = config.sof.wireguard.interfaceName;
           };
           wireguardConfig = {
-            PrivateKeyFile = "/run/wireguard-proton-private";
+            PrivateKeyFile = config.sof.wireguard.privateKeyFile;
             ListenPort = 51820;
           };
           wireguardPeers = [

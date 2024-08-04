@@ -9,14 +9,11 @@
   };
 
   config = lib.mkIf config.sof.wireguard-quick.enable {
-    warnings = lib.optional (config.sof.wireguard-quick.enable) ''
-      WG key has not yet been SOPS encrypted.
-    '';
     networking.wg-quick.interfaces = {
-      wg0 = {
+      ${config.sof.wireguard.interfaceName} = {
         address = [ "10.2.0.2/24" ];
         dns = [ "10.2.0.1" ];
-        privateKeyFile = "/run/wireguard-keys/proton-private";
+        privateKeyFile = config.sof.wireguard.privateKeyFile;
 
         peers = [
           {
