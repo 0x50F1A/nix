@@ -50,6 +50,6 @@
       };
     };
 
-    virtualisation.docker.enableNvidia = lib.mkIf config.virtualisation.docker.enable true;
+    hardware.nvidia-container-toolkit.enable = lib.mkIf config.virtualisation.docker.enable true;
   };
 }
