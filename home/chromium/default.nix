@@ -16,8 +16,8 @@
   config = lib.mkIf config.sof.edge.enable {
     programs = {
       chromium = {
-        enable = false;
-        package = pkgs.microsoft-edge;
+        enable = true;
+        package = pkgs.microsoft-edge-dev;
         commandLineArgs = [
           "--enable-features=UseOzonePlatform"
           "--ozone-platform=wayland"
